@@ -23,10 +23,12 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm install # ✅ no npm ci
+        run: npm install
 
       - name: Build project
         run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
 
       - name: Export static files
         run: npx next export
