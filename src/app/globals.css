@@ -455,3 +455,18 @@ button {
 		height: 0 !important;
 	}
 }
+
+@media (min-width: 769px) {
+	.hero-mobile-description {
+		max-width: min(46ch, 38vw) !important;
+		font-size: clamp(0.9rem, 0.95vw, 1.06rem) !important;
+		line-height: 1.72 !important;
+		font-weight: 300 !important;
+	}
+
+	.hero-mobile-badge {
+		font-size: clamp(0.68rem, 0.7vw, 0.82rem) !important;
+		padding: 0.52rem 0.95rem !important;
+		letter-spacing: 0.11em !important;
+	}
+}

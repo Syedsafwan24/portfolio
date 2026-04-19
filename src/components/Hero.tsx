@@ -115,7 +115,7 @@ export function Hero() {
 			>
 				{/* Left: description */}
 				<p
-					className='text-[clamp(0.88rem,3.8vw,1rem)] md:text-[clamp(0.75rem,0.85vw,0.95rem)] font-extralight md:font-light w-full leading-[1.7] font-sans hero-mobile-description md:absolute md:bottom-[8vh] md:left-[4vw] md:max-w-[30ch] md:pointer-events-auto'
+					className='text-[clamp(0.95rem,4.2vw,1.08rem)] md:text-[clamp(0.75rem,0.85vw,0.95rem)] font-light md:font-light w-full max-w-[36ch] md:max-w-[30ch] leading-[1.72] font-sans hero-mobile-description md:absolute md:bottom-[10vh] md:left-[4vw] md:pointer-events-auto'
 					style={{ color: 'var(--theme-white-text)' }}
 				>
 					Building end-to-end digital experiences. Frontend Developer with
@@ -126,7 +126,7 @@ export function Hero() {
 				{/* Right: pills */}
 				<div className='flex flex-col items-start mt-4 gap-2 hero-mobile-badges md:absolute md:bottom-[8vh] md:right-[4vw] md:gap-[0.6rem] md:pointer-events-auto md:items-end'>
 					<div
-						className='px-3 py-1.5 md:px-[1.2vw] md:py-[0.7vh] rounded-full border text-[min(2.2vw,0.6rem)] md:text-[min(0.65vw,0.6rem)] tracking-[0.12em] uppercase flex items-center gap-[0.4vw] hero-mobile-badge'
+						className='px-4 py-2 md:px-[1.2vw] md:py-[0.7vh] rounded-full border text-[min(2.8vw,0.72rem)] md:text-[min(0.65vw,0.6rem)] tracking-[0.12em] uppercase flex items-center gap-[0.4vw] hero-mobile-badge'
 						style={{
 							color: 'var(--theme-green)',
 							borderColor: 'var(--theme-pill-border)',
@@ -135,14 +135,14 @@ export function Hero() {
 						}}
 					>
 						<span
-							className='w-[0.45vh] h-[0.45vh] min-w-[4px] min-h-[4px] rounded-full'
+							className='w-[0.55vh] h-[0.55vh] min-w-[5px] min-h-[5px] rounded-full'
 							style={{ backgroundColor: 'var(--theme-green)' }}
 						/>
 						AVAILABLE FOR WORK
 					</div>
 
 					<div
-						className='px-3 py-1.5 md:px-[1.2vw] md:py-[0.7vh] rounded-full border text-[min(2.2vw,0.6rem)] md:text-[min(0.65vw,0.6rem)] tracking-[0.12em] uppercase hero-mobile-badge'
+						className='px-4 py-2 md:px-[1.2vw] md:py-[0.7vh] rounded-full border text-[min(2.8vw,0.72rem)] md:text-[min(0.65vw,0.6rem)] tracking-[0.12em] uppercase hero-mobile-badge'
 						style={{
 							color: 'var(--theme-white-text)',
 							borderColor: 'var(--theme-pill-border)',
@@ -154,7 +154,7 @@ export function Hero() {
 					</div>
 
 					<div
-						className='px-3 py-1.5 md:px-[1.2vw] md:py-[0.7vh] rounded-full border text-[min(2.2vw,0.6rem)] md:text-[min(0.65vw,0.6rem)] tracking-[0.12em] uppercase hero-mobile-badge'
+						className='px-4 py-2 md:px-[1.2vw] md:py-[0.7vh] rounded-full border text-[min(2.8vw,0.72rem)] md:text-[min(0.65vw,0.6rem)] tracking-[0.12em] uppercase hero-mobile-badge'
 						style={{
 							color: 'var(--theme-white-text)',
 							borderColor: 'var(--theme-pill-border)',
@@ -163,18 +163,6 @@ export function Hero() {
 						}}
 					>
 						UI DESIGN
-					</div>
-
-					<div
-						className='px-3 py-1.5 md:px-[1.2vw] md:py-[0.7vh] rounded-full border text-[min(2.2vw,0.6rem)] md:text-[min(0.65vw,0.6rem)] tracking-[0.12em] uppercase hero-mobile-badge'
-						style={{
-							color: 'var(--theme-white-text)',
-							borderColor: 'var(--theme-pill-border)',
-							width: 'auto',
-							display: 'inline-flex',
-						}}
-					>
-						DEVOPS & CI/CD
 					</div>
 				</div>
 			</motion.div>

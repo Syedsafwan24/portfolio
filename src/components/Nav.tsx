@@ -159,24 +159,23 @@ export function Nav() {
 				{/* Mobile Nav Toggle (Replaced with Theme Toggle) */}
 				<button
 					onClick={toggleTheme}
-					className='md:hidden flex items-center gap-[0.4vw] transition-colors duration-300'
+					className='md:hidden flex items-center gap-[0.35rem] transition-colors duration-300 rounded-full px-[0.95rem] py-[0.36rem]'
 					style={{
 						color: 'var(--theme-toggle-text)',
 						fontWeight: 400,
 						borderWidth: '1px',
 						borderStyle: 'solid',
 						borderColor: 'var(--theme-toggle-border)',
-						borderRadius: '99px',
-						padding: '0.35em 0.9em',
-						fontSize: 'clamp(0.7rem, 2.5vw, 0.8rem)',
+						fontSize: '0.68rem',
+						letterSpacing: '0.14em',
 					}}
 					aria-label={`Switch to ${isLight ? 'dark' : 'light'} mode`}
 				>
 					<span
 						className='rounded-full relative overflow-hidden flex'
 						style={{
-							width: '10px',
-							height: '10px',
+							width: '8px',
+							height: '8px',
 							minWidth: '8px',
 							minHeight: '8px',
 							backgroundColor: 'var(--theme-toggle-text)',
