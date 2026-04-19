@@ -50,6 +50,7 @@
 	--theme-arrow: #f5f0e8;
 	--theme-footer-text: #999999;
 	--theme-navbar-bg: #111111;
+	--theme-navbar-blur-bg: rgba(17, 17, 17, 0.62);
 	--theme-navbar-link: #f5f0e8;
 	--theme-toggle-text: #f5f0e8;
 	--theme-toggle-border: rgba(255, 255, 255, 0.2);
@@ -96,6 +97,7 @@ html.light-mode {
 	--theme-arrow: #111111;
 	--theme-footer-text: #888888;
 	--theme-navbar-bg: #f4f0e8;
+	--theme-navbar-blur-bg: rgba(244, 240, 232, 0.72);
 	--theme-navbar-link: #111111;
 	--theme-toggle-text: #111111;
 	--theme-toggle-border: rgba(0, 0, 0, 0.25);
@@ -301,22 +303,17 @@ button {
 
 	.nav-mobile-shell {
 		position: fixed !important;
-		top: 0 !important;
 		left: 0 !important;
 		right: 0 !important;
-		margin-left: 0 !important;
-		margin-right: 0 !important;
-		border-radius: 0 !important;
 	}
 
 	.nav-mobile-row {
-		height: var(--navbar-height, 60px) !important;
 		padding-left: 1rem !important;
 		padding-right: 1rem !important;
 	}
 
 	.nav-mobile-menu-panel {
-		top: var(--navbar-height, 60px) !important;
+		top: 100% !important;
 	}
 
 	.preloader-mobile-shell {

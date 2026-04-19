@@ -11,13 +11,11 @@ export function Hero() {
 		offset: ['start start', 'end start'],
 	});
 
-	const textOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-	const textY = useTransform(scrollYProgress, [0, 0.5], [0, -60]);
-
 	return (
 		<section
 			ref={sectionRef}
-			className='relative h-[100vh] flex flex-col px-[3vw] md:px-[4vw] overflow-hidden hero-mobile'
+			className='relative h-[100vh] flex flex-col justify-center px-[3vw] overflow-hidden hero-mobile md:p-0 md:m-0 md:block'
+			style={{ minHeight: '100svh' }}
 		>
 			{/* Noise Overlay */}
 			<div
@@ -28,29 +26,22 @@ export function Hero() {
 				}}
 			></div>
 
-			{/* ── TOP: Label ── */}
-			<motion.div
-				className='relative z-10 pt-[16vh] md:pt-[18vh] hero-mobile-top'
-				style={{ opacity: textOpacity, y: textY }}
-			>
+			{/* ── ALL CONTENT GROUPED IN ONE CONTAINER ── */}
+			<motion.div className='relative z-10 w-full flex flex-col hero-content-wrapper md:static md:block'>
+				{/* Label */}
 				<motion.div
 					initial={{ opacity: 0, y: '1vh' }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.8, ease: EASE, delay: 0.3 }}
-					className='font-sans text-[min(2.2vw,0.65rem)] md:text-[min(0.7vw,0.65rem)] tracking-[0.2em] font-medium uppercase'
-					style={{ color: 'var(--theme-accent-label)' }}
+					className='font-sans text-[min(2.2vw,0.65rem)] md:text-[min(0.7vw,0.65rem)] tracking-[0.2em] font-light uppercase hero-mobile-label md:absolute md:top-[24vh] md:left-[4vw] md:z-20'
+					style={{ color: 'var(--theme-heading)' }}
 				>
 					FRONTEND DEVELOPER & UI/UX DESIGNER
 				</motion.div>
-			</motion.div>
 
-			{/* ── MIDDLE: Giant Name (fills width) ── */}
-			<motion.div
-				className='relative z-10 flex-1 flex items-center w-full hero-mobile-heading-wrap'
-				style={{ opacity: textOpacity, y: textY }}
-			>
+				{/* Name */}
 				<div
-					className='w-full font-display font-extrabold leading-[0.82] tracking-[-0.04em]'
+					className='font-display font-extrabold leading-[0.82] tracking-[-0.04em] hero-mobile-name-container md:absolute md:top-1/2 md:-translate-y-1/2 md:left-[4vw] md:right-0 md:w-full md:overflow-hidden'
 					style={{ color: 'var(--theme-heading)' }}
 				>
 					<motion.div
@@ -63,13 +54,9 @@ export function Hero() {
 						}}
 						className='overflow-hidden w-full'
 					>
-						{/* Use CSS to stretch text to fill the full container width */}
 						<div
-							className='w-full whitespace-nowrap hero-mobile-name-line-1'
-							style={{
-								fontSize: 'clamp(3rem, 14vw, 16rem)',
-								display: 'block',
-							}}
+							className='w-full whitespace-nowrap hero-mobile-name-line hero-mobile-name-line-1 text-[clamp(3rem,14vw,16rem)] md:text-[clamp(6rem,12vw,16rem)] md:leading-[0.85]'
+							style={{ display: 'block' }}
 						>
 							Syed
 						</div>
@@ -85,11 +72,8 @@ export function Hero() {
 						className='overflow-hidden w-full'
 					>
 						<div
-							className='w-full whitespace-nowrap hero-mobile-name-line-2'
-							style={{
-								fontSize: 'clamp(3rem, 11vw, 13rem)',
-								display: 'block',
-							}}
+							className='w-full whitespace-nowrap hero-mobile-name-line hero-mobile-name-line-2 text-[clamp(3rem,11vw,13rem)] md:text-[clamp(6rem,12vw,16rem)] md:leading-[0.85]'
+							style={{ display: 'block' }}
 						>
 							Safwan
 						</div>
@@ -102,9 +86,9 @@ export function Hero() {
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}
 				transition={{ delay: 1.8 }}
-				className='absolute right-[3vw] md:right-[4vw] top-[45%] -translate-y-1/2 flex-col items-center gap-[1.5vh] hidden lg:flex z-20'
+				className='absolute right-[3vw] top-[50%] -translate-y-1/2 flex-col items-center gap-[1.5vh] hidden md:flex z-20 hero-mobile-scroll md:right-[1.5rem] md:top-[15vh] md:translate-y-0 md:gap-[0.75rem]'
 			>
-				<div className='relative w-[2px] h-[4vh] overflow-hidden opacity-60'>
+				<div className='relative w-[2px] h-[4vh] overflow-hidden opacity-60 hero-mobile-scroll-line md:w-[1px] md:h-[5vh] md:mb-[0.5rem]'>
 					<motion.div
 						className='w-full h-[2vh]'
 						style={{ backgroundColor: 'var(--theme-orange)' }}
@@ -117,7 +101,7 @@ export function Hero() {
 					/>
 				</div>
 				<span
-					className='text-[min(0.65vw,0.55rem)] tracking-[0.25em] uppercase font-sans'
+					className='text-[min(0.65vw,0.55rem)] tracking-[0.25em] uppercase font-sans hero-mobile-scroll-text'
 					style={{
 						writingMode: 'vertical-rl',
 						textOrientation: 'mixed',
@@ -133,11 +117,11 @@ export function Hero() {
 				initial={{ opacity: 0, y: '2vh' }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 1, duration: 0.8, ease: EASE }}
-				className='relative z-10 w-full flex flex-col md:flex-row justify-between items-start md:items-end gap-[4vh] md:gap-0 pb-[5vh] hero-mobile-bottom'
+				className='relative z-10 w-full flex flex-col justify-between items-start gap-[4vh] pb-[5vh] hero-mobile-bottom mt-auto md:absolute md:inset-0 md:pointer-events-none md:p-0 md:m-0'
 			>
 				{/* Left: description */}
 				<p
-					className='text-[clamp(0.75rem,0.85vw,0.95rem)] font-light w-full md:max-w-[22vw] leading-[1.7] font-sans hero-mobile-description'
+					className='text-[clamp(0.75rem,0.85vw,0.95rem)] font-light w-full leading-[1.7] font-sans hero-mobile-description md:absolute md:bottom-[8vh] md:left-[4vw] md:max-w-[30ch] md:pointer-events-auto'
 					style={{ color: 'var(--theme-white-text)' }}
 				>
 					Building end-to-end digital experiences. Frontend Developer with
@@ -146,12 +130,14 @@ export function Hero() {
 				</p>
 
 				{/* Right: pills */}
-				<div className='flex flex-col items-start md:items-end gap-[1vh] hero-mobile-badges'>
+				<div className='flex flex-col items-start gap-[1vh] hero-mobile-badges md:absolute md:bottom-[8vh] md:right-[4vw] md:gap-[0.6rem] md:pointer-events-auto md:items-end'>
 					<div
-						className='px-[1.2vw] py-[0.7vh] rounded-full border text-[min(2.2vw,0.6rem)] md:text-[min(0.65vw,0.6rem)] tracking-[0.12em] uppercase flex items-center gap-[0.4vw]'
+						className='px-[1.2vw] py-[0.7vh] rounded-full border text-[min(2.2vw,0.6rem)] md:text-[min(0.65vw,0.6rem)] tracking-[0.12em] uppercase flex items-center gap-[0.4vw] hero-mobile-badge'
 						style={{
 							color: 'var(--theme-green)',
 							borderColor: 'var(--theme-pill-border)',
+							width: 'auto',
+							display: 'inline-flex',
 						}}
 					>
 						<span
@@ -162,30 +148,36 @@ export function Hero() {
 					</div>
 
 					<div
-						className='px-[1.2vw] py-[0.7vh] rounded-full border text-[min(2.2vw,0.6rem)] md:text-[min(0.65vw,0.6rem)] tracking-[0.12em] uppercase'
+						className='px-[1.2vw] py-[0.7vh] rounded-full border text-[min(2.2vw,0.6rem)] md:text-[min(0.65vw,0.6rem)] tracking-[0.12em] uppercase hero-mobile-badge'
 						style={{
 							color: 'var(--theme-white-text)',
 							borderColor: 'var(--theme-pill-border)',
+							width: 'auto',
+							display: 'inline-flex',
 						}}
 					>
 						REACT & NEXT.JS
 					</div>
 
 					<div
-						className='px-[1.2vw] py-[0.7vh] rounded-full border text-[min(2.2vw,0.6rem)] md:text-[min(0.65vw,0.6rem)] tracking-[0.12em] uppercase'
+						className='px-[1.2vw] py-[0.7vh] rounded-full border text-[min(2.2vw,0.6rem)] md:text-[min(0.65vw,0.6rem)] tracking-[0.12em] uppercase hero-mobile-badge'
 						style={{
 							color: 'var(--theme-white-text)',
 							borderColor: 'var(--theme-pill-border)',
+							width: 'auto',
+							display: 'inline-flex',
 						}}
 					>
 						UI DESIGN
 					</div>
 
 					<div
-						className='px-[1.2vw] py-[0.7vh] rounded-full border text-[min(2.2vw,0.6rem)] md:text-[min(0.65vw,0.6rem)] tracking-[0.12em] uppercase'
+						className='px-[1.2vw] py-[0.7vh] rounded-full border text-[min(2.2vw,0.6rem)] md:text-[min(0.65vw,0.6rem)] tracking-[0.12em] uppercase hero-mobile-badge'
 						style={{
 							color: 'var(--theme-white-text)',
 							borderColor: 'var(--theme-pill-border)',
+							width: 'auto',
+							display: 'inline-flex',
 						}}
 					>
 						DEVOPS & CI/CD
