@@ -38,10 +38,12 @@ const structuredData = {
 
 export default function Home() {
 	return (
-		<main className='w-full relative'>
+		<main className='w-full relative' style={{ backgroundColor: 'var(--theme-bg)' }}>
 			<script
 				type='application/ld+json'
-				dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+				dangerouslySetInnerHTML={{
+					__html: JSON.stringify(structuredData),
+				}}
 			/>
 			<Nav />
 			<Hero />

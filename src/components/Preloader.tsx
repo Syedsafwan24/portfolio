@@ -5,30 +5,12 @@ import { useState, useEffect } from 'react';
 
 export function Preloader({ isComplete }: { isComplete: boolean }) {
 	const [showLoader, setShowLoader] = useState(!isComplete);
-	const [percentage, setPercentage] = useState(0);
 
 	useEffect(() => {
-		if (!isComplete) {
-			// Animate percentage from 0 to 100 over 2.3 seconds
-			const startTime = Date.now();
-			const duration = 2300;
-
-			const interval = setInterval(() => {
-				const elapsed = Date.now() - startTime;
-				const progress = Math.min((elapsed / duration) * 100, 100);
-				setPercentage(Math.floor(progress));
-
-				if (progress >= 100) {
-					clearInterval(interval);
-					setPercentage(100);
-				}
-			}, 20);
-
-			return () => clearInterval(interval);
-		} else {
+		if (isComplete) {
 			const timer = setTimeout(() => {
 				setShowLoader(false);
-			}, 500);
+			}, 600);
 			return () => clearTimeout(timer);
 		}
 	}, [isComplete]);
@@ -38,41 +20,53 @@ export function Preloader({ isComplete }: { isComplete: boolean }) {
 	return (
 		<motion.div
 			initial={{ opacity: 1 }}
-			exit={{ opacity: 0 }}
-			transition={{ duration: 0.6, ease: 'easeInOut' }}
-			className='fixed inset-0 bg-[#0A0A0A] z-[999] flex items-center justify-center overflow-hidden'
+			animate={isComplete ? { opacity: 0 } : { opacity: 1 }}
+			transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+			className='fixed inset-0 z-[999] flex items-center justify-center overflow-hidden'
+			style={{ backgroundColor: 'var(--theme-preloader-bg)' }}
 		>
-			<div className='flex flex-col items-center justify-center gap-8'>
-				{/* SY3D Text */}
+			<div className='flex flex-col items-center justify-center relative z-10'>
+				{/* Name — Syne Bold */}
 				<motion.div
-					initial={{ opacity: 0, scale: 0.8 }}
-					animate={{ opacity: 1, scale: 1 }}
-					transition={{ duration: 0.6, ease: 'easeOut' }}
-					className='text-6xl md:text-7xl font-bold font-mono text-white tracking-tighter'
+					initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
+					animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+					transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+					className='font-display text-center'
+					style={{
+						fontSize: 'clamp(2.5rem, 7vw, 6rem)',
+						fontWeight: 800,
+						letterSpacing: '-0.02em',
+						lineHeight: 1,
+						color: 'var(--theme-heading)',
+					}}
 				>
-					SY3D
+					Syed Safwan
 				</motion.div>
 
 				{/* Loading Bar */}
-				<div className='w-64 flex flex-col items-center gap-3'>
-					<motion.div
-						initial={{ scaleX: 0 }}
-						animate={{ scaleX: 1 }}
-						transition={{
-							duration: 2.3,
-							ease: 'easeInOut',
-						}}
-						className='w-full h-[2px] bg-gradient-to-r from-transparent via-white to-transparent origin-left'
-					/>
-					<motion.div
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						transition={{ delay: 0.5, duration: 0.3 }}
-						className='text-xs font-mono text-white/50 tracking-widest'
+				<motion.div
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					transition={{ delay: 0.5, duration: 0.6 }}
+					className='mt-[4vh]'
+					style={{ width: 'clamp(80px, 8vw, 120px)' }}
+				>
+					<div
+						className='w-full h-[2px] relative overflow-hidden rounded-full'
+						style={{ backgroundColor: 'var(--theme-border)' }}
 					>
-						{percentage}%
-					</motion.div>
-				</div>
+						<motion.div
+							initial={{ scaleX: 0 }}
+							animate={{ scaleX: 1 }}
+							transition={{
+								duration: 2.5,
+								ease: [0.16, 1, 0.3, 1],
+							}}
+							className='absolute inset-0 origin-left rounded-full'
+							style={{ backgroundColor: 'var(--theme-heading)' }}
+						/>
+					</div>
+				</motion.div>
 			</div>
 		</motion.div>
 	);

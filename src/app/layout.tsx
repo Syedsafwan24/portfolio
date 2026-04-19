@@ -1,12 +1,18 @@
 import type { Metadata } from 'next';
-import { JetBrains_Mono } from 'next/font/google';
+import { Inter, Syne } from 'next/font/google';
 import './globals.css';
 import { RootProvider } from '@/components/RootProvider';
 
-const jetBrainsMono = JetBrains_Mono({
-	variable: '--font-jetbrains-mono',
+const inter = Inter({
+	variable: '--font-inter',
 	subsets: ['latin'],
-	weight: ['400'],
+	weight: ['300', '400', '500', '600', '700', '800', '900'],
+});
+
+const syne = Syne({
+	variable: '--font-syne',
+	subsets: ['latin'],
+	weight: ['400', '500', '600', '700', '800'],
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://sy3d.dev';
@@ -67,8 +73,32 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang='en' className={`${jetBrainsMono.variable}`}>
-			<body className='antialiased font-sans min-h-screen text-black bg-white selection:bg-black selection:text-white'>
+		<html lang='en' className={`${inter.variable} ${syne.variable}`}>
+			<head>
+				<script
+					dangerouslySetInnerHTML={{
+						__html: `(() => {
+							try {
+								const savedTheme = localStorage.getItem('theme');
+								if (savedTheme === 'light') {
+									document.documentElement.classList.add('light-mode');
+								} else {
+									document.documentElement.classList.remove('light-mode');
+								}
+							} catch (e) {
+								document.documentElement.classList.remove('light-mode');
+							}
+						})();`,
+					}}
+				/>
+			</head>
+			<body
+				className='antialiased min-h-screen'
+				style={{
+					backgroundColor: 'var(--theme-bg)',
+					color: 'var(--color-foreground)',
+				}}
+			>
 				<RootProvider>{children}</RootProvider>
 			</body>
 		</html>

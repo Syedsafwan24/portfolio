@@ -1,39 +1,109 @@
-"use client";
+'use client';
 
-import { FadeIn } from "./animation/FadeIn";
+import { FadeIn } from './animation/FadeIn';
 
 const certifications = [
-  { source: "UDEMY · 2025", title: "Graphic Design Masterclass" },
-  { source: "UDEMY · 2024", title: "The Ultimate React Course 2024: React, Next.js, Redux & More" }
+	{
+		source: 'UDEMY · 2024',
+		title: 'The Ultimate React Course 2024: React, Next.js, Redux & More',
+	},
 ];
 
 export function Certifications() {
-  return (
-    <section className="section-padding border-t border-[#0A0A0A]">
-      <div className="px-[20px] md:px-[80px] max-w-[1920px] mx-auto mb-16">
-        <div className="md:w-1/4">
-          <FadeIn className="font-mono text-[11px] uppercase">
-            05 — CERTIFICATIONS
-          </FadeIn>
-        </div>
-      </div>
+	return (
+		<section
+			className='relative'
+			style={{
+				paddingTop: 'clamp(4rem, 8vh, 8rem)',
+				paddingBottom: 'clamp(4rem, 8vh, 8rem)',
+			}}
+		>
+			{/* Header */}
+			<div className='px-[3vw] md:px-[4vw]' style={{ marginBottom: '8vh' }}>
+				<FadeIn>
+					<div
+						className='font-display uppercase tracking-[0.2em]'
+						style={{
+							fontSize: 'clamp(0.65rem, 0.8vw, 0.9rem)',
+							marginBottom: '3vh',
+							color: 'var(--theme-muted)',
+							fontWeight: 300,
+						}}
+					>
+						Credentials
+					</div>
+				</FadeIn>
+				<FadeIn>
+					<h2
+						className='font-display'
+						style={{
+							fontSize: 'clamp(3rem, 7vw, 7.5rem)',
+							lineHeight: 1,
+							letterSpacing: '-0.02em',
+							marginBottom: '4vh',
+							color: 'var(--theme-heading)',
+							fontWeight: 800,
+						}}
+					>
+						Certifications
+					</h2>
+					<div
+						style={{
+							width: '100%',
+							height: '1px',
+							background: 'var(--theme-border-heading)',
+						}}
+					/>
+				</FadeIn>
+			</div>
 
-      <div className="flex flex-col border-t border-[#0A0A0A]">
-        {certifications.map((cert, index) => (
-          <FadeIn key={index} delay={index * 0.05} className="w-full">
-            <div className="w-full group hover:bg-[#0A0A0A] hover:text-[#F1F1F1] transition-colors duration-200 border-b border-[#0A0A0A]">
-              <div className="px-[20px] md:px-[80px] max-w-[1920px] mx-auto py-6 flex flex-col md:flex-row gap-4 md:gap-0">
-                <div className="md:w-1/4 font-mono text-[11px] text-[#0A0A0A]/40 group-hover:text-[#F1F1F1]/70 transition-colors duration-200">
-                  {cert.source}
-                </div>
-                <div className="md:w-3/4 font-light text-[14px] md:text-[15px]">
-                  {cert.title}
-                </div>
-              </div>
-            </div>
-          </FadeIn>
-        ))}
-      </div>
-    </section>
-  );
+			{/* Certification rows */}
+			<div className='flex flex-col px-[3vw] md:px-[4vw]'>
+				{certifications.map((cert, index) => (
+					<FadeIn key={index} delay={index * 0.05} className='w-full'>
+						<div
+							className='w-full group border-t last:border-b transition-colors duration-500'
+							style={{ borderColor: 'var(--theme-border)' }}
+							onMouseEnter={(e) => {
+								e.currentTarget.style.backgroundColor =
+									'var(--theme-card-hover)';
+							}}
+							onMouseLeave={(e) => {
+								e.currentTarget.style.backgroundColor = 'transparent';
+							}}
+						>
+							<div className='py-[1.8vh] flex flex-col md:flex-row gap-[1vh] md:gap-0 items-start md:items-center'>
+								<div
+									className='md:w-1/4 font-sans uppercase tracking-[0.15em]'
+									style={{
+										fontSize: 'clamp(0.6rem, 0.7vw, 0.75rem)',
+										color: 'var(--theme-muted)',
+										fontWeight: 300,
+									}}
+								>
+									{cert.source}
+								</div>
+								<div
+									className='md:w-3/4 transition-colors duration-300'
+									style={{
+										fontSize: 'clamp(0.8rem, 0.95vw, 1rem)',
+										color: 'var(--theme-body)',
+										fontWeight: 400,
+									}}
+									onMouseEnter={(e) => {
+										e.currentTarget.style.color = 'var(--theme-heading)';
+									}}
+									onMouseLeave={(e) => {
+										e.currentTarget.style.color = 'var(--theme-body)';
+									}}
+								>
+									{cert.title}
+								</div>
+							</div>
+						</div>
+					</FadeIn>
+				))}
+			</div>
+		</section>
+	);
 }

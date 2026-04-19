@@ -1,6 +1,8 @@
 'use client';
 
-import { FadeIn } from './animation/FadeIn';
+import { motion } from 'framer-motion';
+import { FadeIn, FadeInSlide } from './animation/FadeIn';
+import { ArrowUpRight } from 'lucide-react';
 
 const featuredProjects = [
 	{
@@ -10,8 +12,8 @@ const featuredProjects = [
 			'Multi-location inventory, sales, and purchasing management system actively used by 30+ employees across operations, sales, and purchasing workflows.',
 		metrics: [
 			{ number: '30+', label: 'Active Users' },
-			{ number: 'Real-time', label: 'Socket.IO Updates' },
-			{ number: 'Multi-Location', label: 'Support' },
+			{ number: 'Real-time', label: 'Socket.IO' },
+			{ number: 'Multi-Loc', label: 'Support' },
 		],
 		highlights: [
 			'Product catalog with SKU/barcode support',
@@ -27,7 +29,7 @@ const featuredProjects = [
 			'Socket.IO',
 			'TailwindCSS',
 		],
-		status: 'IN DEVELOPMENT',
+		status: 'WORK IN PROGRESS',
 		url: 'https://stockflow.procraft.ae',
 	},
 	{
@@ -36,9 +38,9 @@ const featuredProjects = [
 		description:
 			'End-to-end awards nominations system for the Bhatkal Community Jeddah with RESTful backend APIs, authentication, and role-based access control for managing 20+ student nominations.',
 		metrics: [
-			{ number: '20+', label: 'Student Nominations' },
-			{ number: 'JWT Auth', label: 'Secure Access' },
-			{ number: '3 Roles', label: 'RBAC System' },
+			{ number: '20+', label: 'Nominations' },
+			{ number: 'JWT', label: 'Auth' },
+			{ number: '3 Roles', label: 'RBAC' },
 		],
 		highlights: [
 			'RESTful backend APIs with Django REST Framework',
@@ -46,7 +48,7 @@ const featuredProjects = [
 			'Modular nomination intake & review pipelines',
 			'Automated reporting and nomination management',
 		],
-		tech: ['Django', 'Django REST Framework', 'JWT', 'PostgreSQL', 'RBAC'],
+		tech: ['Django', 'DRF', 'JWT', 'PostgreSQL', 'RBAC'],
 		status: 'LIVE',
 		url: 'https://educational.bcjed.com',
 	},
@@ -56,7 +58,7 @@ const featuredProjects = [
 		description:
 			'Full-stack CMS platform serving 400+ community members with bilingual EN/Urdu content, full RTL support, and comprehensive content management capabilities.',
 		metrics: [
-			{ number: '400+', label: 'Community Members' },
+			{ number: '400+', label: 'Members' },
 			{ number: 'Bilingual', label: 'EN/Urdu' },
 			{ number: 'Full RTL', label: 'Support' },
 		],
@@ -76,8 +78,8 @@ const featuredProjects = [
 		description:
 			'Full-stack multilingual product catalog and CMS for an established Saudi garments manufacturer & distributor. Shipped from zero to production in 7 days with high-performance SEO optimization.',
 		metrics: [
-			{ number: '7 Days', label: 'Zero to Live' },
-			{ number: 'Est. 1993', label: 'Client Est.' },
+			{ number: '7 Days', label: 'To Live' },
+			{ number: 'Est. 1993', label: 'Client' },
 			{ number: 'SEO', label: 'Optimized' },
 		],
 		highlights: [
@@ -97,133 +99,319 @@ const otherProjects = [
 		id: '01',
 		name: 'The Virtual Greens',
 		status: 'LIVE',
-		desc: 'Indoor Golf Simulator — Riyadh, Saudi Arabia',
-		tags: 'React.js · Figma-to-Code · Bilingual · RTL',
-		urlText: 'thevirtualgreens.com →',
+		desc: 'Indoor Golf Simulator — Riyadh',
+		tags: 'React.js · Figma-to-Code · Bilingual',
 		url: '#',
 	},
 	{
 		id: '02',
 		name: 'Bin Abed General Land Transport',
 		status: 'LIVE',
-		desc: 'GCC Freight & Logistics — Saudi Arabia',
+		desc: 'GCC Freight & Logistics',
 		tags: 'React.js · Corporate · Responsive',
-		urlText: 'binabed.com →',
 		url: '#',
 	},
 	{
 		id: '03',
 		name: 'Euclase',
 		status: 'LIVE',
-		desc: 'First client project — Static website',
+		desc: 'First client project',
 		tags: 'React.js · Static · Performance',
-		urlText: 'euclase.com →',
 		url: '#',
 	},
 	{
 		id: '04',
 		name: 'ProCraft',
 		status: 'LIVE',
-		desc: 'Creative Digital Agency — Dubai, UAE',
+		desc: 'Creative Digital Agency — Dubai',
 		tags: 'Next.js · TailwindCSS · SEO',
-		urlText: 'procraft.ae →',
 		url: '#',
 	},
 	{
 		id: '05',
 		name: 'AITM College Website',
 		status: 'LIVE',
-		desc: 'VTU Engineering College — Bhatkal, Karnataka',
-		tags: 'Figma · Django · TailwindCSS · AI-Assisted',
-		urlText: 'aitm.edu.in →',
+		desc: 'VTU Engineering College',
+		tags: 'Figma · Django · TailwindCSS',
 		url: '#',
 	},
 	{
 		id: '06',
 		name: 'BCJ Ramadan Portal',
 		status: 'LIVE',
-		desc: 'Ramadan Platform — Bhatkal Community Jeddah',
+		desc: 'Ramadan Platform',
 		tags: 'Next.js · Admin Management',
-		urlText: 'ramadhan.bcjed.com →',
 		url: '#',
 	},
 	{
 		id: '07',
 		name: 'SharmaSpace.in',
 		status: 'LIVE',
-		desc: 'Interior Designers — Bangalore, India',
-		tags: 'Next.js · CMS · AWS Amplify · CI/CD',
-		urlText: 'sharmaspace.in →',
+		desc: 'Interior Designers — Bangalore',
+		tags: 'Next.js · CMS · AWS Amplify',
 		url: '#',
 	},
 	{
 		id: '08',
 		name: 'StudyTilawah',
 		status: 'LIVE',
-		desc: 'Learn the Quran the Right Way — Static',
+		desc: 'Learn the Quran the Right Way',
 		tags: 'React.js · Static · Accessible',
-		urlText: 'studytilawah.com →',
 		url: '#',
 	},
 ];
 
 export function Projects() {
+	const isWorkInProgress = (status: string) => {
+		const normalized = status.toUpperCase();
+		return (
+			normalized.includes('WORK IN PROGRESS') ||
+			normalized.includes('IN DEVELOPMENT')
+		);
+	};
+
+	const getStatusTheme = (status: string) => {
+		if (isWorkInProgress(status)) {
+			return {
+				label: 'WORK IN PROGRESS',
+				color: 'var(--theme-orange)',
+				bg: 'color-mix(in srgb, var(--theme-orange) 12%, transparent)',
+				border: 'color-mix(in srgb, var(--theme-orange) 45%, transparent)',
+				glow: 'color-mix(in srgb, var(--theme-orange) 20%, transparent)',
+			};
+		}
+
+		if (status.toUpperCase() === 'LIVE') {
+			return {
+				label: 'LIVE',
+				color: 'var(--theme-green)',
+				bg: 'color-mix(in srgb, var(--theme-green) 12%, transparent)',
+				border: 'color-mix(in srgb, var(--theme-green) 45%, transparent)',
+				glow: 'color-mix(in srgb, var(--theme-green) 20%, transparent)',
+			};
+		}
+
+		return null;
+	};
+
+	const renderStatusPill = (status: string, fontSize: string) => {
+		const theme = getStatusTheme(status);
+
+		if (!theme) {
+			return (
+				<span
+					className='font-sans uppercase tracking-[0.15em]'
+					style={{
+						fontSize,
+						fontWeight: 300,
+						color: 'var(--theme-muted)',
+					}}
+				>
+					{status}
+				</span>
+			);
+		}
+
+		return (
+			<span
+				className='font-sans uppercase tracking-[0.14em]'
+				style={{
+					fontSize,
+					fontWeight: 500,
+					color: theme.color,
+					backgroundColor: theme.bg,
+					border: `1px solid ${theme.border}`,
+					borderRadius: '9999px',
+					padding: '0.34rem 0.76rem',
+					display: 'inline-flex',
+					alignItems: 'center',
+					gap: '0.42rem',
+					lineHeight: 1.05,
+					boxShadow: `0 0 0 1px ${theme.glow} inset`,
+				}}
+			>
+				<span
+					style={{
+						width: '0.34rem',
+						height: '0.34rem',
+						borderRadius: '9999px',
+						backgroundColor: theme.color,
+						boxShadow: 'none',
+						flexShrink: 0,
+					}}
+				/>
+				{theme.label}
+			</span>
+		);
+	};
+
 	return (
 		<section
 			id='projects'
-			className='section-padding border-t border-[#0A0A0A]'
+			className='relative'
+			style={{
+				paddingTop: 'clamp(4rem, 8vh, 8rem)',
+				paddingBottom: 'clamp(4rem, 8vh, 8rem)',
+			}}
 		>
-			<div className='px-[20px] md:px-[80px] max-w-[1920px] mx-auto mb-16'>
-				<div className='md:w-1/4'>
-					<FadeIn className='font-mono text-[11px] uppercase'>
-						03 — PROJECTS
-					</FadeIn>
-				</div>
+			{/* Header */}
+			<div
+				className='px-[3vw] md:px-[4vw] relative z-10'
+				style={{ marginBottom: '8vh' }}
+			>
+				<FadeIn>
+					<div
+						className='font-display uppercase tracking-[0.2em]'
+						style={{
+							fontSize: 'clamp(0.65rem, 0.8vw, 0.9rem)',
+							marginBottom: '3vh',
+							color: 'var(--theme-muted)',
+							fontWeight: 300,
+						}}
+					>
+						Selected work
+					</div>
+				</FadeIn>
+				<FadeIn>
+					<h2
+						className='font-display'
+						style={{
+							fontSize: 'clamp(3rem, 7vw, 7.5rem)',
+							lineHeight: 1,
+							letterSpacing: '-0.02em',
+							marginBottom: '4vh',
+							color: 'var(--theme-heading)',
+							fontWeight: 800,
+						}}
+					>
+						Projects
+					</h2>
+					<div
+						style={{
+							width: '100%',
+							height: '1px',
+							background: 'var(--theme-border-heading)',
+						}}
+					/>
+				</FadeIn>
 			</div>
 
-			{/* Featured Projects Section */}
-			<div className='px-[20px] md:px-[80px] max-w-[1920px] mx-auto space-y-6 mb-16'>
+			{/* Featured Projects */}
+			<div
+				className='px-[3vw] md:px-[4vw] relative z-10'
+				style={{
+					display: 'flex',
+					flexDirection: 'column',
+					gap: 'clamp(1.5rem, 2vw, 2rem)',
+					marginBottom: 'clamp(3rem, 6vh, 6rem)',
+				}}
+			>
 				{featuredProjects.map((project, idx) => (
-					<FadeIn key={project.name} delay={idx * 0.1}>
+					<FadeInSlide key={project.name} delay={idx * 0.1}>
 						<a
 							href={project.url}
 							target='_blank'
 							rel='noopener noreferrer'
-							className='block group'
+							className='block group project-hover-target'
+							data-cursor-text='Click to visit'
 						>
-							<div className='relative border-2 border-[#0A0A0A] bg-white hover:bg-[#0A0A0A] transition-all duration-300 overflow-hidden'>
-								{/* Gradient accent */}
-								<div className='absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#0A0A0A] via-gray-600 to-transparent'></div>
-
-								<div className='p-8 md:p-12'>
+							<motion.div
+								className='relative border rounded-sm overflow-hidden transition-colors duration-500'
+								style={{
+									borderColor: 'var(--theme-card-border)',
+									backgroundColor: 'var(--theme-card-bg)',
+								}}
+								whileHover={{ y: -2 }}
+								transition={{ duration: 0.4 }}
+							>
+								<div style={{ padding: 'clamp(1.5rem, 3vw, 3rem)' }}>
 									{/* Header */}
-									<div className='flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-8'>
+									<div className='flex flex-col md:flex-row md:justify-between md:items-start gap-[1.5vh] mb-[3vh]'>
 										<div>
 											<div
-												className={`inline-block px-3 py-1 bg-[#0A0A0A] text-[#F1F1F1] font-mono text-[10px] uppercase tracking-wider mb-3 group-hover:bg-[#F1F1F1] group-hover:text-[#0A0A0A] transition-colors`}
+												className='inline-block font-sans uppercase tracking-[0.15em] rounded-sm'
+												style={{
+													fontSize: 'clamp(0.6rem, 0.65vw, 0.7rem)',
+													padding:
+														'clamp(0.2rem, 0.4vh, 0.35rem) clamp(0.4rem, 0.6vw, 0.7rem)',
+													marginBottom: '1.5vh',
+													color: 'var(--theme-project-featured-label-text)',
+													backgroundColor:
+														'var(--theme-project-featured-label-bg)',
+													fontWeight: 300,
+												}}
 											>
 												{idx === 0 ? 'Featured Project' : 'Key Project'}
 											</div>
-											<h3 className='text-4xl md:text-5xl font-bold tracking-tighter group-hover:text-[#F1F1F1] transition-colors mb-2'>
+											<h3
+												className='tracking-[-0.02em] transition-colors'
+												style={{
+													fontSize: 'clamp(1.5rem, 2.5vw, 2.5rem)',
+													marginBottom: '0.5vh',
+													color: 'var(--theme-heading)',
+													fontWeight: 700,
+												}}
+											>
 												{project.name}
 											</h3>
-											<p className='text-[13px] italic text-[#0A0A0A]/60 group-hover:text-[#F1F1F1]/70 transition-colors'>
+											<p
+												style={{
+													fontSize: 'clamp(0.75rem, 0.85vw, 0.95rem)',
+													color: 'var(--theme-body)',
+													fontWeight: 300,
+												}}
+											>
 												{project.tagline}
 											</p>
 										</div>
-										<div className='font-mono text-[11px] text-[#0A0A0A]/50 group-hover:text-[#F1F1F1]/70 transition-colors uppercase tracking-widest flex-shrink-0'>
-											{project.status}
+										<div className='flex items-center gap-[0.8vw]'>
+											{renderStatusPill(
+												project.status,
+												'clamp(0.6rem, 0.65vw, 0.7rem)',
+											)}
+											<motion.div
+												className='opacity-0 group-hover:opacity-100 transition-opacity duration-300'
+												whileHover={{ rotate: 45 }}
+											>
+												<ArrowUpRight
+													size={16}
+													style={{ color: 'var(--theme-arrow)' }}
+												/>
+											</motion.div>
 										</div>
 									</div>
 
 									{/* Metrics */}
-									<div className='grid grid-cols-3 gap-4 mb-10 py-8 border-y border-[#0A0A0A]/10 group-hover:border-[#F1F1F1]/20 transition-colors'>
+									<div
+										className='grid grid-cols-3 border-y'
+										style={{
+											gap: 'clamp(0.5rem, 1vw, 1rem)',
+											marginBottom: 'clamp(1.5rem, 3vh, 2.5rem)',
+											padding: 'clamp(1rem, 2vh, 2rem) 0',
+											borderColor: 'var(--theme-border)',
+										}}
+									>
 										{project.metrics.map((metric, metricIdx) => (
 											<div key={metricIdx} className='text-center'>
-												<div className='text-2xl md:text-3xl font-bold text-[#0A0A0A] group-hover:text-[#F1F1F1] transition-colors'>
+												<div
+													className='tracking-tight'
+													style={{
+														fontSize: 'clamp(1.1rem, 1.5vw, 1.6rem)',
+														color: 'var(--theme-heading)',
+														fontWeight: 600,
+													}}
+												>
 													{metric.number}
 												</div>
-												<div className='font-mono text-[10px] text-[#0A0A0A]/50 group-hover:text-[#F1F1F1]/60 transition-colors uppercase mt-1'>
+												<div
+													className='font-sans uppercase tracking-[0.15em]'
+													style={{
+														fontSize: 'clamp(0.55rem, 0.6vw, 0.65rem)',
+														marginTop: '0.3vh',
+														color: 'var(--theme-muted)',
+														fontWeight: 300,
+													}}
+												>
 													{metric.label}
 												</div>
 											</div>
@@ -231,21 +419,49 @@ export function Projects() {
 									</div>
 
 									{/* Description */}
-									<p className='text-[15px] leading-relaxed text-[#0A0A0A] group-hover:text-[#F1F1F1] transition-colors mb-8'>
+									<p
+										className='leading-[1.8] max-w-[60vw]'
+										style={{
+											fontSize: 'clamp(0.8rem, 0.9vw, 1rem)',
+											marginBottom: 'clamp(1.5rem, 3vh, 2.5rem)',
+											color: 'var(--theme-body)',
+											fontWeight: 400,
+										}}
+									>
 										{project.description}
 									</p>
 
 									{/* Highlights */}
-									<div className='grid md:grid-cols-2 gap-3 mb-8'>
+									<div
+										className='grid md:grid-cols-2'
+										style={{
+											gap: 'clamp(0.5rem, 1vh, 0.8rem)',
+											marginBottom: 'clamp(1.5rem, 3vh, 2.5rem)',
+										}}
+									>
 										{project.highlights.map((highlight, highlightIdx) => (
 											<div
 												key={highlightIdx}
-												className='flex items-center gap-2'
+												className='flex items-start gap-[0.6vw]'
 											>
-												<span className='text-[#0A0A0A] group-hover:text-[#F1F1F1] transition-colors flex-shrink-0 text-[12px]'>
-													★
+												<span
+													className='mt-[0.2vh]'
+													style={{
+														fontSize: 'clamp(0.55rem, 0.65vw, 0.7rem)',
+														color: 'var(--color-accent)',
+														opacity: 0.4,
+													}}
+												>
+													◆
 												</span>
-												<span className='text-[13px] text-[#0A0A0A]/80 group-hover:text-[#F1F1F1]/90 transition-colors'>
+												<span
+													className='leading-relaxed'
+													style={{
+														fontSize: 'clamp(0.7rem, 0.8vw, 0.85rem)',
+														color: 'var(--theme-body)',
+														fontWeight: 300,
+													}}
+												>
 													{highlight}
 												</span>
 											</div>
@@ -253,85 +469,145 @@ export function Projects() {
 									</div>
 
 									{/* Tech Stack */}
-									<div className='flex flex-wrap gap-2 pt-6 border-t border-[#0A0A0A]/10 group-hover:border-[#F1F1F1]/20 transition-colors'>
+									<div
+										className='flex flex-wrap gap-[0.5vw] pt-[2vh] border-t'
+										style={{ borderColor: 'var(--theme-border)' }}
+									>
 										{project.tech.map((tech, techIdx) => (
 											<span
 												key={techIdx}
-												className='px-3 py-1 bg-[#0A0A0A]/5 text-[11px] font-mono text-[#0A0A0A] group-hover:bg-[#F1F1F1]/10 group-hover:text-[#F1F1F1] transition-colors uppercase'
+												className='font-sans uppercase tracking-wider rounded-sm'
+												style={{
+													fontSize: 'clamp(0.6rem, 0.65vw, 0.7rem)',
+													padding:
+														'clamp(0.2rem, 0.4vh, 0.35rem) clamp(0.4rem, 0.6vw, 0.7rem)',
+													color: 'var(--theme-project-tag-text)',
+													backgroundColor: 'var(--theme-project-tag-bg)',
+													fontWeight: 300,
+												}}
 											>
 												{tech}
 											</span>
 										))}
 									</div>
-
-									{/* CTA */}
-									<div className='mt-6 font-mono text-[12px] text-[#0A0A0A] group-hover:text-[#F1F1F1] transition-colors flex items-center gap-2'>
-										View Project{' '}
-										<span className='group-hover:translate-x-1 transition-transform'>
-											→
-										</span>
-									</div>
 								</div>
-							</div>
+							</motion.div>
 						</a>
-					</FadeIn>
+					</FadeInSlide>
 				))}
 			</div>
 
-			{/* Other Projects Section */}
-			<div className='px-[20px] md:px-[80px] max-w-[1920px] mx-auto mt-16 mb-8'>
-				<FadeIn className='font-mono text-[11px] uppercase text-[#0A0A0A]/60'>
-					OTHER PROJECTS
+			{/* Other Projects Header */}
+			<div
+				className='px-[3vw] md:px-[4vw] relative z-10'
+				style={{ marginBottom: '3vh' }}
+			>
+				<FadeIn>
+					<span
+						className='font-sans uppercase tracking-[0.2em]'
+						style={{
+							fontSize: 'clamp(0.6rem, 0.65vw, 0.7rem)',
+							color: 'var(--theme-muted)',
+							fontWeight: 300,
+						}}
+					>
+						Other Projects
+					</span>
 				</FadeIn>
 			</div>
 
-			{/* Other Projects Grid */}
-			<div className='flex flex-col border-t border-[#0A0A0A]'>
+			{/* Other Projects List */}
+			<div className='flex flex-col relative z-10 px-[3vw] md:px-[4vw]'>
 				{otherProjects.map((project, index) => (
-					<FadeIn key={project.id} delay={index * 0.05} className='w-full'>
+					<FadeIn key={project.id} delay={index * 0.03} className='w-full'>
 						<a
 							href={project.url}
-							className='block w-full group hover:bg-[#0A0A0A] hover:text-[#F1F1F1] transition-none border-b border-[#0A0A0A]'
+							className='block w-full group border-t last:border-b transition-colors duration-500 project-hover-target'
+							style={{ borderColor: 'var(--theme-border)' }}
+							data-cursor-text='Click to visit'
 						>
-							<div className='px-[20px] md:px-[80px] max-w-[1920px] mx-auto py-8 flex flex-col md:flex-row gap-6 md:gap-0'>
-								{/* Mobile ID and Status Wrapper */}
+							<div className='py-[1.8vh] flex flex-col md:flex-row gap-[1vh] md:gap-0'>
+								{/* Mobile ID & Status */}
 								<div className='flex justify-between md:hidden'>
-									<div className='font-mono text-[11px] text-[#0A0A0A]/40 group-hover:text-[#F1F1F1]/70'>
+									<span
+										className='font-sans'
+										style={{
+											fontSize: 'clamp(0.6rem, 0.65vw, 0.7rem)',
+											color: 'var(--theme-other-project-number)',
+											fontWeight: 300,
+										}}
+									>
 										{project.id}
-									</div>
-									<div className='font-mono text-[11px] text-[#0A0A0A]/40 group-hover:text-[#F1F1F1]/70'>
-										{project.status}
-									</div>
+									</span>
+									{renderStatusPill(
+										project.status,
+										'clamp(0.6rem, 0.65vw, 0.7rem)',
+									)}
 								</div>
 
 								{/* ID (Desktop) */}
-								<div className='hidden md:block md:w-[8%] shrink-0'>
-									<div className='font-mono text-[11px] text-[#0A0A0A]/40 group-hover:text-[#F1F1F1]/70'>
+								<div className='hidden md:block md:w-[8%]'>
+									<span
+										className='font-sans'
+										style={{
+											fontSize: 'clamp(0.6rem, 0.65vw, 0.7rem)',
+											color: 'var(--theme-other-project-number)',
+											fontWeight: 300,
+										}}
+									>
 										{project.id}
-									</div>
+									</span>
 								</div>
 
-								{/* Middle Content */}
-								<div className='flex flex-col md:w-[67%] gap-1'>
-									<div className='font-light text-[18px] md:text-[24px] tracking-tight'>
+								{/* Content */}
+								<div className='md:w-[62%] flex flex-col gap-[0.3vh]'>
+									<motion.div
+										className='tracking-tight transition-colors duration-300'
+										style={{
+											fontSize: 'clamp(1rem, 1.5vw, 1.4rem)',
+											color: 'var(--theme-heading)',
+											fontWeight: 400,
+										}}
+										whileHover={{ x: 4 }}
+										transition={{ duration: 0.3 }}
+									>
 										{project.name}
-									</div>
-									<div className='font-light text-[15px] italic mb-2 mt-1'>
+									</motion.div>
+									<div
+										style={{
+											fontSize: 'clamp(0.75rem, 0.85vw, 0.95rem)',
+											color: 'var(--theme-body)',
+											fontWeight: 300,
+										}}
+									>
 										{project.desc}
 									</div>
-									<div className='font-mono text-[11px] text-[#0A0A0A]/40 group-hover:text-[#F1F1F1]/70'>
+									<div
+										className='font-sans tracking-wide'
+										style={{
+											fontSize: 'clamp(0.6rem, 0.65vw, 0.7rem)',
+											marginTop: '0.3vh',
+											color: 'var(--theme-muted)',
+											fontWeight: 300,
+										}}
+									>
 										{project.tags}
 									</div>
 								</div>
 
-								{/* Right Align Status & URL (Desktop) / Just URL (Mobile) */}
-								<div className='flex flex-col justify-between items-end md:w-[25%] mt-2 md:mt-0'>
-									<div className='hidden md:block font-mono text-[11px] text-[#0A0A0A]/40 group-hover:text-[#F1F1F1]/70'>
-										{project.status}
-									</div>
-									<div className='font-mono text-[11px] w-full text-left md:text-right md:w-auto'>
-										{project.urlText}
-									</div>
+								{/* Status & Arrow */}
+								<div className='hidden md:flex flex-col justify-between items-end md:w-[30%]'>
+									{renderStatusPill(
+										project.status,
+										'clamp(0.6rem, 0.65vw, 0.7rem)',
+									)}
+									<motion.div
+										className='transition-colors'
+										style={{ color: 'var(--theme-arrow)' }}
+										whileHover={{ x: 3, y: -3 }}
+									>
+										<ArrowUpRight size={14} strokeWidth={1} />
+									</motion.div>
 								</div>
 							</div>
 						</a>
