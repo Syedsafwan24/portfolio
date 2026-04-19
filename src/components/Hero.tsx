@@ -40,7 +40,7 @@ export function Hero() {
 					initial={{ opacity: 0, y: '1vh' }}
 					animate={heroReady ? { opacity: 1, y: 0 } : { opacity: 0, y: '1vh' }}
 					transition={{ duration: 0.8, ease: EASE, delay: 0.3 }}
-					className='mt-0 md:mt-0 font-sans text-[min(2.2vw,0.65rem)] mb-1 md:mb-3 md:text-[min(0.7vw,0.65rem)] tracking-[0.2em] font-light uppercase hero-mobile-label md:absolute md:top-[24vh] md:left-[4vw] md:z-20'
+					className='mt-0 md:mt-0 font-sans text-[clamp(0.6rem,2.8vw,0.72rem)] md:text-[clamp(0.68rem,0.75vw,0.82rem)] mb-1 md:mb-3 tracking-[0.22em] md:tracking-[0.2em] leading-tight font-light uppercase hero-mobile-label md:absolute md:top-[24vh] md:left-[4vw] md:z-20'
 					style={{ color: 'var(--theme-heading)' }}
 				>
 					FRONTEND DEVELOPER & UI/UX DESIGNER
