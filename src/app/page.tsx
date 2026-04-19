@@ -38,7 +38,10 @@ const structuredData = {
 
 export default function Home() {
 	return (
-		<main className='w-full relative' style={{ backgroundColor: 'var(--theme-bg)' }}>
+		<main
+			className='w-full relative overflow-x-hidden'
+			style={{ backgroundColor: 'var(--theme-bg)' }}
+		>
 			<script
 				type='application/ld+json'
 				dangerouslySetInnerHTML={{
