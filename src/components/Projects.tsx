@@ -6,20 +6,20 @@ import { ArrowUpRight } from 'lucide-react';
 
 const featuredProjects = [
 	{
-		name: 'StockFlow',
-		tagline: 'Full-Stack Inventory & Operations Platform',
+		name: 'ProCraft ERP',
+		tagline: 'Multi-tenant SaaS ERP',
 		description:
-			'Multi-location inventory, sales, and purchasing management system actively used by 30+ employees across operations, sales, and purchasing workflows.',
+			'Multi-tenant SaaS ERP for multi-branch retail and wholesale — inventory, POS billing, purchasing, and accounting in one system, in production with businesses in Dubai and India.',
 		metrics: [
-			{ number: '30+', label: 'Active Users' },
-			{ number: 'Real-time', label: 'Socket.IO' },
+			{ number: 'Real-time', label: 'GL & VAT' },
 			{ number: 'Multi-Loc', label: 'Support' },
+			{ number: '173', label: 'RBAC Codes' },
 		],
 		highlights: [
-			'Product catalog with SKU/barcode support',
-			'Batch tracking & automated low-stock alerts',
-			'Background job processing for async workflows',
-			'Role-based access control & admin dashboard',
+			'Auto-posts double-entry GL (COGS, revenue, UAE 5% VAT)',
+			'Per-location stock with batch/expiry tracking',
+			'Weighted-average costing & bi-directional Shopify sync',
+			'RBAC built from 173 permission codes with full audit trail',
 		],
 		tech: [
 			'Next.js',
@@ -27,10 +27,10 @@ const featuredProjects = [
 			'PostgreSQL',
 			'Prisma',
 			'Socket.IO',
-			'TailwindCSS',
+			'SaaS',
 		],
-		status: 'WORK IN PROGRESS',
-		url: 'https://stockflow.procraft.ae',
+		status: 'LIVE',
+		url: 'https://erp.procraft.ae',
 	},
 	{
 		name: 'BCJ Educational Awards Portal',

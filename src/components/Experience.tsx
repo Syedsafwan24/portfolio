@@ -5,56 +5,56 @@ import { FadeIn, FadeInSlide } from './animation/FadeIn';
 
 const experiences = [
 	{
-		role: 'Outsource Frontend Developer',
+		role: 'Full Stack Developer',
 		duration: 'June 2025 — Present',
 		location: 'ProCraft Digital Agency · Dubai, UAE · Remote',
 		details: [
 			{
-				title: 'DEVELOPMENT',
+				title: 'DELIVERY',
 				description:
-					'Built StockFlow — full-stack inventory and operations platform actively used by 30+ employees across operations, sales, and purchasing workflows.',
+					'Build and ship 4 production projects for GCC clients across interior design, hospitality, retail, and SaaS — owning frontend, backend, and deployment on each.',
+			},
+			{
+				title: 'PROCRAFT ERP',
+				description:
+					'Built and shipped ProCraft ERP, a multi-tenant inventory, POS, and accounting SaaS now live with retail and wholesale businesses in the UAE and India.',
 			},
 			{
 				title: 'PROJECTS',
 				description:
-					'Built SharmaSpace — interior design studio website with full CI/CD pipeline on AWS Amplify. Delivered The Virtual Greens — bilingual EN/AR React app with full RTL support for a golf simulator lounge in Riyadh.',
+					'Delivered Smart Arrow, a multilingual CMS for a 30-year-old Saudi manufacturer, from zero to production in 7 days. Shipped SharmaSpace (AWS Amplify) and The Virtual Greens (bilingual RTL) for Riyadh and UAE clients.',
 			},
 			{
-				title: 'CLIENT WORK',
+				title: 'DEVOPS',
 				description:
-					'Contracted by ProCraft Digital Agency, Dubai to build and ship production projects for GCC clients across interior design, hospitality, and retail.',
+					'Standardised automated GitHub Actions pipelines deploying to Hostinger VPS and AWS.',
 			},
 		],
 	},
 	{
-		role: 'Freelance Web Developer, UI/UX Designer & DevOps',
-		duration: 'October 2024 — Present',
-		location: 'Gulf Region & India',
+		role: 'Freelance Full Stack Developer & UI/UX Designer',
+		duration: 'October 2024 — May 2025',
+		location: 'Independent · Gulf Region & India · Remote',
 		details: [
 			{
-				title: 'Development',
+				title: 'DELIVERY',
 				description:
-					'Built 12 production websites across React.js and Next.js with TailwindCSS. Delivered client-provided Figma designs as pixel-perfect React applications. Implemented CMS systems, bilingual RTL support, and admin dashboards for clients across Saudi Arabia, UAE, and India.',
+					'Delivered 12 production websites across Saudi Arabia, the UAE, and India — including Bin Abed General Land Transport, a Dubai freight operator running 450+ vehicles across 8 GCC countries.',
 			},
 			{
-				title: 'Design',
+				title: 'FRONTEND & BILINGUAL',
 				description:
-					'Created brand identities, posters, banners, and social creatives. Led visual design for college hackathons, sports tournaments, and cultural fests. Designed the AITM college website UI from scratch in Figma.',
+					'Built bilingual EN/AR and EN/Urdu platforms with full RTL support via react-i18next, delivering client Figma designs as pixel-accurate React applications.',
 			},
 			{
-				title: 'Video Editing',
+				title: 'BACKEND & CMS',
 				description:
-					'Produced promotional reels and content for clients using Adobe Premiere Pro, After Effects, and CapCut.',
+					'Implemented CMS and admin dashboards with JWT auth, RBAC, and REST APIs on Next.js + PostgreSQL + Prisma.',
 			},
 			{
-				title: 'DevOps',
+				title: 'DEVOPS',
 				description:
-					'Configured GitHub CI/CD pipelines via GitHub Actions. Deployed and managed production apps on Hostinger VPS. Handled cloud deployments on AWS Amplify with Amazon RDS.',
-			},
-			{
-				title: 'AI Workflows',
-				description:
-					'Daily use of Claude AI, Cursor, GitHub Copilot, OpenAI Codex, Figma Make, and Antigravity AI to accelerate design and development.',
+					'Ran DevOps end-to-end: GitHub Actions CI/CD, Hostinger VPS, AWS Amplify, and Amazon RDS.',
 			},
 		],
 	},

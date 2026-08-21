@@ -6,13 +6,13 @@ import { FadeIn, FadeInSlide } from './animation/FadeIn';
 const experience = [
 	{
 		company: 'ProCraft Digital Agency · Dubai',
-		role: 'Outsource Frontend Developer',
+		role: 'Full Stack Developer',
 		period: 'Jun 2025 - Present',
 	},
 	{
 		company: 'Freelance',
-		role: 'Web Developer, UI/UX Designer & DevOps',
-		period: 'Oct 2024 - Present',
+		role: 'Full Stack Developer & UI/UX Designer',
+		period: 'Oct 2024 - May 2025',
 	},
 	{
 		company: 'AITM Bhatkal',
@@ -23,7 +23,7 @@ const experience = [
 
 const achievements = [
 	{
-		title: 'StockFlow',
+		title: 'ProCraft ERP',
 		org: 'Actively used by 30+ employees in production',
 		date: '2026',
 	},
@@ -120,10 +120,10 @@ export function About() {
 							}}
 						>
 							<span style={{ color: 'var(--theme-heading)', fontWeight: 500 }}>
-								Final-year Computer Science student
+								Computer Science graduate
 							</span>{' '}
-							at AITM Bhatkal, GPA 7.7. Freelancing since October 2024 across
-							clients in the Gulf region and India.
+							and full-stack developer with nearly 2 years shipping production software
+							for clients across the UAE, Saudi Arabia, and India.
 						</p>
 					</FadeInSlide>
 
@@ -167,7 +167,7 @@ export function About() {
 
 					<FadeIn delay={0.25}>
 						<a
-							href='/SyedSafwan_Resume_Final.pdf'
+							href='/SyedSafwan_CV.pdf'
 							target='_blank'
 							rel='noopener noreferrer'
 							className='group inline-flex items-center gap-[0.6vw] uppercase tracking-[0.12em] border rounded-full transition-all duration-300'
