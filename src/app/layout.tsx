@@ -18,7 +18,7 @@ const syne = Syne({
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://syedsafwan.dev';
 const siteTitle = 'Syed Safwan Pirzade';
 const siteDescription =
-	'Frontend Developer building high-performance web products with Next.js, React, and modern UI systems.';
+	'Co-Founder & Full Stack Developer at ProCraft building high-performance web products and offering digital services.';
 
 export const metadata: Metadata = {
 	metadataBase: new URL(siteUrl),
@@ -29,11 +29,12 @@ export const metadata: Metadata = {
 	description: siteDescription,
 	keywords: [
 		'Syed Safwan Pirzade',
-		'Frontend Developer',
-		'Next.js Developer',
-		'React Developer',
-		'Portfolio',
-		'UI UX',
+		'Software Developer',
+		'Co-Founder ProCraft',
+		'Next.js Expert',
+		'Bhatkal Web Development',
+		'Custom Software Solutions',
+		'UI/UX Designer',
 	],
 	authors: [{ name: siteTitle }],
 	creator: siteTitle,
@@ -82,7 +83,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang='en' className={`${inter.variable} ${syne.variable}`}>
+		<html lang='en-IN' className={`${inter.variable} ${syne.variable}`}>
 			<head>
 				<script
 					dangerouslySetInnerHTML={{

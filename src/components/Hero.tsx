@@ -43,12 +43,12 @@ export function Hero() {
 					className='mt-0 md:mt-0 font-sans text-[clamp(0.6rem,2.8vw,0.72rem)] md:text-[clamp(0.68rem,0.75vw,0.82rem)] mb-1 md:mb-3 tracking-[0.22em] md:tracking-[0.2em] leading-tight font-light uppercase hero-mobile-label md:absolute md:top-[24vh] md:left-[4vw] md:z-20'
 					style={{ color: 'var(--theme-heading)' }}
 				>
-					FRONTEND DEVELOPER & UI/UX DESIGNER
+					CO-FOUNDER & FULL STACK DEVELOPER
 				</motion.div>
 
 				{/* Name */}
 				<div className='w-full mt-8 hero-mobile-name-center md:block md:flex-none'>
-					<div
+					<h1
 						className='w-full flex-none font-display font-extrabold leading-[0.8] tracking-[-0.04em] hero-mobile-name-container md:absolute md:top-1/2 md:-translate-y-1/2 md:left-[4vw] md:right-0 md:w-full md:overflow-hidden md:flex-none'
 						style={{ color: 'var(--theme-heading)' }}
 					>
@@ -90,7 +90,7 @@ export function Hero() {
 								Safwan
 							</div>
 						</motion.div>
-					</div>
+					</h1>
 				</div>
 			</motion.div>
 
@@ -137,9 +137,7 @@ export function Hero() {
 					className='text-[clamp(0.95rem,4.2vw,1.08rem)] md:text-[clamp(0.75rem,0.85vw,0.95rem)] font-light md:font-light w-full max-w-[36ch] md:max-w-[30ch] leading-[1.72] font-sans hero-mobile-description md:absolute md:bottom-[10vh] md:left-[4vw] md:pointer-events-auto'
 					style={{ color: 'var(--theme-white-text)' }}
 				>
-					Building end-to-end digital experiences. Frontend Developer with
-					experience across modern frameworks, UI/UX systems and product-focused
-					development.
+					Building end-to-end digital experiences. Co-Founder of ProCraft Digital Agency, offering comprehensive digital services across modern frameworks, UI/UX systems and product-focused development.
 				</p>
 
 				{/* Right: pills */}

@@ -8,33 +8,7 @@ import { Experience } from '@/components/Experience';
 import { Certifications } from '@/components/Certifications';
 import { Footer } from '@/components/Footer';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://syedsafwan.dev';
-
-const structuredData = {
-	'@context': 'https://schema.org',
-	'@graph': [
-		{
-			'@type': 'Person',
-			name: 'Syed Safwan Pirzade',
-			url: siteUrl,
-			jobTitle: 'Frontend Developer',
-			description:
-				'Frontend Developer specializing in Next.js, React, and product-focused interfaces.',
-		},
-		{
-			'@type': 'WebSite',
-			name: 'Syed Safwan Pirzade Portfolio',
-			url: siteUrl,
-			description:
-				'Portfolio showcasing frontend projects, product work, and engineering experience.',
-			potentialAction: {
-				'@type': 'SearchAction',
-				target: `${siteUrl}/?q={search_term_string}`,
-				'query-input': 'required name=search_term_string',
-			},
-		},
-	],
-};
+import { StructuredData } from '@/components/StructuredData';
 
 export default function Home() {
 	return (
@@ -42,12 +16,7 @@ export default function Home() {
 			className='w-full relative overflow-x-hidden'
 			style={{ backgroundColor: 'var(--theme-bg)' }}
 		>
-			<script
-				type='application/ld+json'
-				dangerouslySetInnerHTML={{
-					__html: JSON.stringify(structuredData),
-				}}
-			/>
+			<StructuredData />
 			<Nav />
 			<Hero />
 			<Ticker />

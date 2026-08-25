@@ -6,7 +6,7 @@ import { FadeIn, FadeInSlide } from './animation/FadeIn';
 const experience = [
 	{
 		company: 'ProCraft Digital Agency · Dubai',
-		role: 'Full Stack Developer',
+		role: 'Co-Founder & Full Stack Developer',
 		period: 'Jun 2025 - Present',
 	},
 	{
@@ -120,9 +120,9 @@ export function About() {
 							}}
 						>
 							<span style={{ color: 'var(--theme-heading)', fontWeight: 500 }}>
-								Computer Science graduate
+								Co-Founder & Full Stack Developer
 							</span>{' '}
-							and full-stack developer with nearly 2 years shipping production software
+							at ProCraft Digital Agency. We offer complete digital services, shipping production software
 							for clients across the UAE, Saudi Arabia, and India.
 						</p>
 					</FadeInSlide>
@@ -156,18 +156,19 @@ export function About() {
 								fontWeight: 350,
 							}}
 						>
-							I own the{' '}
+							Through our agency, we provide{' '}
 							<span style={{ color: 'var(--theme-heading)', fontWeight: 500 }}>
-								full product scope
-							</span>{' '}
-							from design to deployed code. I like working with teams where
-							decisions are debated, not just handed down.
+								full-service digital solutions
+							</span>
+							, from design to deployed code. I enjoy working closely with clients to build tailored products that drive real results.
 						</p>
 					</FadeInSlide>
 
+
+
 					<FadeIn delay={0.25}>
 						<a
-							href='/SyedSafwan_CV.pdf'
+							href='/SyedSafwan_Resume_Final.pdf'
 							target='_blank'
 							rel='noopener noreferrer'
 							className='group inline-flex items-center gap-[0.6vw] uppercase tracking-[0.12em] border rounded-full transition-all duration-300'

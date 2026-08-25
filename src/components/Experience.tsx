@@ -5,7 +5,7 @@ import { FadeIn, FadeInSlide } from './animation/FadeIn';
 
 const experiences = [
 	{
-		role: 'Full Stack Developer',
+		role: 'Co-Founder & Full Stack Developer',
 		duration: 'June 2025 — Present',
 		location: 'ProCraft Digital Agency · Dubai, UAE · Remote',
 		details: [
