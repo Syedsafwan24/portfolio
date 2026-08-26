@@ -22,7 +22,7 @@ If this project is already a git repo, skip `git init` and just run `git add`, `
 
 This repo includes:
 
-- `.github/workflows/deploy-pages.yml`
+- `.github/workflows/nextjs.yml`
 
 It automatically builds your Next.js app as a static export and deploys it to GitHub Pages on every push to `main`.
 
@@ -52,7 +52,7 @@ Any new push to `main` will auto-deploy.
 
 ## Optional: custom domain
 
-If you use a custom domain, set `NEXT_PUBLIC_SITE_URL` in repository settings:
+The custom domain is already committed as `public/CNAME`. To point the build at a different origin, set `NEXT_PUBLIC_SITE_URL` in repository settings:
 
 1. **Settings** -> **Secrets and variables** -> **Actions** -> **Variables**
 2. Add variable:
