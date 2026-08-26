@@ -11,15 +11,31 @@ export function FadeIn({
 	children,
 	delay = 0,
 	className = '',
+	fadeOpacity = false,
 }: {
 	children: ReactNode;
 	delay?: number;
 	className?: string;
+	/**
+	 * Whether to fade as well as translate. Defaults to false.
+	 *
+	 * `initial={{ opacity: 0 }}` is serialised into the prerendered HTML as
+	 * style="opacity:0". Googlebot runs the JS and recovers, but extractors that
+	 * don't (GPTBot, ClaudeBot, PerplexityBot, OAI-SearchBot) can read that as
+	 * hidden text — and in this codebase every one of these wrappers holds
+	 * indexable prose. Translating without fading keeps the great majority of
+	 * the perceived motion while leaving the markup visible, so it is the safe
+	 * default; opt back in only for purely decorative elements.
+	 */
+	fadeOpacity?: boolean;
 }) {
+	const hidden = fadeOpacity ? { opacity: 0, y: 30 } : { y: 30 };
+	const shown = fadeOpacity ? { opacity: 1, y: 0 } : { y: 0 };
+
 	return (
 		<motion.div
-			initial={{ opacity: 0, y: 30 }}
-			whileInView={{ opacity: 1, y: 0 }}
+			initial={hidden}
+			whileInView={shown}
 			viewport={{ once: true, margin: '-80px' }}
 			transition={{ duration: DURATION, ease: EASE, delay }}
 			className={className}
@@ -34,11 +50,14 @@ export function FadeInSlide({
 	delay = 0,
 	className = '',
 	direction = 'up',
+	fadeOpacity = false,
 }: {
 	children: ReactNode;
 	delay?: number;
 	className?: string;
 	direction?: 'up' | 'down' | 'left' | 'right';
+	/** See FadeIn — defaults to false so prerendered prose is never hidden. */
+	fadeOpacity?: boolean;
 }) {
 	const directionMap = {
 		up: { y: 40, x: 0 },
@@ -47,20 +66,20 @@ export function FadeInSlide({
 		right: { y: 0, x: -40 },
 	};
 
+	const offset = directionMap[direction];
+
 	return (
 		<motion.div
-			initial={{
-				opacity: 0,
-				y: directionMap[direction].y,
-				x: directionMap[direction].x,
-				filter: 'blur(4px)',
-			}}
-			whileInView={{
-				opacity: 1,
-				y: 0,
-				x: 0,
-				filter: 'blur(0px)',
-			}}
+			initial={
+				fadeOpacity
+					? { opacity: 0, y: offset.y, x: offset.x, filter: 'blur(4px)' }
+					: { y: offset.y, x: offset.x }
+			}
+			whileInView={
+				fadeOpacity
+					? { opacity: 1, y: 0, x: 0, filter: 'blur(0px)' }
+					: { y: 0, x: 0 }
+			}
 			viewport={{ once: true, margin: '-60px' }}
 			transition={{ duration: DURATION, ease: EASE, delay }}
 			className={className}
@@ -141,8 +160,8 @@ export function StaggeredText({
 				>
 					<motion.span
 						className='inline-block'
-						initial={{ y: '100%', opacity: 0 }}
-						whileInView={{ y: 0, opacity: 1 }}
+						initial={{ y: '100%' }}
+						whileInView={{ y: 0 }}
 						viewport={{ once: true, margin: '-50px' }}
 						transition={{
 							duration: DURATION,

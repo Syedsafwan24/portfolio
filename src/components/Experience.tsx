@@ -63,7 +63,7 @@ const experiences = [
 export function Experience() {
 	return (
 		<section
-			id='work'
+			id='experience'
 			className='relative px-[3vw] md:px-[4vw]'
 			style={{
 				paddingTop: 'clamp(4rem, 8vh, 8rem)',

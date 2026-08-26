@@ -1,7 +1,9 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter, Syne } from 'next/font/google';
 import './globals.css';
 import { RootProvider } from '@/components/RootProvider';
+import Script from 'next/script';
+import { SITE } from '@/lib/site';
 
 const inter = Inter({
 	variable: '--font-inter',
@@ -15,55 +17,67 @@ const syne = Syne({
 	weight: ['400', '500', '600', '700', '800'],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://syedsafwan.dev';
-const siteTitle = 'Syed Safwan Pirzade';
-const siteDescription =
-	'Co-Founder & Full Stack Developer at ProCraft building high-performance web products and offering digital services.';
-
+/**
+ * Root metadata.
+ *
+ * Deliberately does NOT set `openGraph.images` / `twitter.images`. Those keys
+ * are inherited wholesale by every child route and would suppress each route's
+ * own opengraph-image.tsx file convention. The home page's OG image is picked
+ * up from src/app/opengraph-image.tsx automatically.
+ *
+ * `alternates.canonical` is likewise NOT set here — an inherited canonical of
+ * '/' would make every subpage self-canonicalise to the home page. Each route
+ * declares its own via buildMetadata() in src/lib/metadata.ts.
+ */
 export const metadata: Metadata = {
-	metadataBase: new URL(siteUrl),
+	metadataBase: new URL(SITE.url),
 	title: {
-		default: `${siteTitle} | Portfolio`,
-		template: `%s | ${siteTitle}`,
+		default: `${SITE.shortName} | Full Stack Developer in Bhatkal, India`,
+		template: `%s | ${SITE.name}`,
 	},
-	description: siteDescription,
+	description: SITE.description,
 	keywords: [
 		'Syed Safwan Pirzade',
-		'Software Developer',
+		'Syed Safwan Peerzade',
+		'software developer in Bhatkal',
+		'web developer Bhatkal',
+		'website developer Bhatkal',
+		'software company Bhatkal',
+		'ERP software Bhatkal',
+		'POS billing software',
+		'e-commerce website development',
+		'mobile app developer Bhatkal',
+		'online election voting system',
 		'Co-Founder ProCraft',
-		'Next.js Expert',
-		'Bhatkal Web Development',
-		'Custom Software Solutions',
-		'UI/UX Designer',
 	],
-	authors: [{ name: siteTitle }],
-	creator: siteTitle,
-	publisher: siteTitle,
-	alternates: {
-		canonical: '/',
-	},
+	authors: [{ name: SITE.name, url: SITE.url }],
+	creator: SITE.name,
+	publisher: SITE.name,
 	openGraph: {
-		title: `${siteTitle} | Portfolio`,
-		description: siteDescription,
+		title: `${SITE.shortName} | Full Stack Developer in Bhatkal, India`,
+		description: SITE.description,
 		url: '/',
-		siteName: siteTitle,
-		locale: 'en_US',
+		siteName: SITE.name,
+		locale: SITE.locale,
 		type: 'website',
-		images: [
-			{
-				url: '/opengraph-image',
-				width: 1200,
-				height: 630,
-				alt: `${siteTitle} | Frontend Developer`,
-			},
-		],
 	},
 	twitter: {
 		card: 'summary_large_image',
-		title: `${siteTitle} | Portfolio`,
-		description: siteDescription,
-		images: ['/opengraph-image'],
+		title: `${SITE.shortName} | Full Stack Developer in Bhatkal, India`,
+		description: SITE.description,
 	},
+	...(SITE.verification.google || SITE.verification.bing
+		? {
+				verification: {
+					...(SITE.verification.google
+						? { google: SITE.verification.google }
+						: {}),
+					...(SITE.verification.bing
+						? { other: { 'msvalidate.01': SITE.verification.bing } }
+						: {}),
+				},
+			}
+		: {}),
 	robots: {
 		index: true,
 		follow: true,
@@ -77,13 +91,23 @@ export const metadata: Metadata = {
 	},
 };
 
+export const viewport: Viewport = {
+	width: 'device-width',
+	initialScale: 1,
+	colorScheme: 'dark light',
+	themeColor: [
+		{ media: '(prefers-color-scheme: dark)', color: '#111111' },
+		{ media: '(prefers-color-scheme: light)', color: '#f4f0e8' },
+	],
+};
+
 export default function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang='en-IN' className={`${inter.variable} ${syne.variable}`}>
+		<html lang={SITE.lang} className={`${inter.variable} ${syne.variable}`}>
 			<head>
 				<script
 					dangerouslySetInnerHTML={{
@@ -110,6 +134,22 @@ export default function RootLayout({
 				}}
 			>
 				<RootProvider>{children}</RootProvider>
+
+				{/* Loaded only when NEXT_PUBLIC_GA_ID is set, so no placeholder ships. */}
+				{SITE.analytics.gaId ? (
+					<>
+						<Script
+							src={`https://www.googletagmanager.com/gtag/js?id=${SITE.analytics.gaId}`}
+							strategy='afterInteractive'
+						/>
+						<Script id='ga4-init' strategy='afterInteractive'>
+							{`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${SITE.analytics.gaId}');`}
+						</Script>
+					</>
+				) : null}
 			</body>
 		</html>
 	);

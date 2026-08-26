@@ -1,23 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { EASE } from './animation/FadeIn';
 import { useLoading } from './RootProvider';
 
 export function Hero() {
 	const { isLoading } = useLoading();
-	const [heroReady, setHeroReady] = useState(false);
-
-	useEffect(() => {
-		if (isLoading) {
-			setHeroReady(false);
-			return;
-		}
-
-		const timer = setTimeout(() => setHeroReady(true), 650);
-		return () => clearTimeout(timer);
-	}, [isLoading]);
+	const heroReady = !isLoading;
 
 	return (
 		<section
@@ -37,9 +26,9 @@ export function Hero() {
 			<motion.div className='relative z-10 w-full flex flex-col flex-1 min-h-0 justify-center hero-content-wrapper md:static md:block'>
 				{/* Label */}
 				<motion.div
-					initial={{ opacity: 0, y: '1vh' }}
-					animate={heroReady ? { opacity: 1, y: 0 } : { opacity: 0, y: '1vh' }}
-					transition={{ duration: 0.8, ease: EASE, delay: 0.3 }}
+					initial={{ y: '1vh' }}
+					animate={heroReady ? { y: 0 } : { y: '1vh' }}
+					transition={{ duration: 0.8, ease: EASE, delay: 0.15 }}
 					className='mt-0 md:mt-0 font-sans text-[clamp(0.6rem,2.8vw,0.72rem)] md:text-[clamp(0.68rem,0.75vw,0.82rem)] mb-1 md:mb-3 tracking-[0.22em] md:tracking-[0.2em] leading-tight font-light uppercase hero-mobile-label md:absolute md:top-[24vh] md:left-[4vw] md:z-20'
 					style={{ color: 'var(--theme-heading)' }}
 				>
@@ -52,44 +41,57 @@ export function Hero() {
 						className='w-full flex-none font-display font-extrabold leading-[0.8] tracking-[-0.04em] hero-mobile-name-container md:absolute md:top-1/2 md:-translate-y-1/2 md:left-[4vw] md:right-0 md:w-full md:overflow-hidden md:flex-none'
 						style={{ color: 'var(--theme-heading)' }}
 					>
-						<motion.div
-							initial={{ opacity: 0, y: '5vh' }}
-							animate={
-								heroReady ? { opacity: 1, y: 0 } : { opacity: 0, y: '5vh' }
-							}
-							transition={{
-								delay: 0.35,
-								duration: 1.2,
-								ease: [0.16, 1, 0.3, 1],
-							}}
-							className='overflow-hidden w-full'
-						>
-							<div
-								className='w-full whitespace-nowrap hero-mobile-name-line hero-mobile-name-line-1 text-[clamp(5.1rem,22vw,8.6rem)] md:text-[clamp(6rem,12vw,16rem)] md:leading-[0.85]'
-								style={{ display: 'block' }}
-							>
-								Syed
+						{/*
+						 * The visible name is split across two lines for the layout, which
+						 * on its own extracts as "SyedSafwan" with no role or location.
+						 * This carries the real heading string for crawlers and screen
+						 * readers; the animated lines below are decorative.
+						 */}
+						<span className='sr-only'>
+							Syed Safwan Pirzade — Full Stack Developer building ERP, POS,
+							e-commerce and online election software in Bhatkal, Karnataka
+						</span>
+
+						<span aria-hidden='true'>
+							<div className='overflow-hidden w-full'>
+								<motion.div
+									initial={{ y: '110%' }}
+									animate={heroReady ? { y: 0 } : { y: '110%' }}
+									transition={{
+										delay: 0.1,
+										duration: 1.1,
+										ease: [0.16, 1, 0.3, 1],
+									}}
+									className='w-full'
+								>
+									<div
+										className='w-full whitespace-nowrap hero-mobile-name-line hero-mobile-name-line-1 text-[clamp(5.1rem,22vw,8.6rem)] md:text-[clamp(6rem,12vw,16rem)] md:leading-[0.85]'
+										style={{ display: 'block' }}
+									>
+										Syed
+									</div>
+								</motion.div>
 							</div>
-						</motion.div>
-						<motion.div
-							initial={{ opacity: 0, y: '5vh' }}
-							animate={
-								heroReady ? { opacity: 1, y: 0 } : { opacity: 0, y: '5vh' }
-							}
-							transition={{
-								delay: 0.5,
-								duration: 1.2,
-								ease: [0.16, 1, 0.3, 1],
-							}}
-							className='overflow-hidden w-full'
-						>
-							<div
-								className='w-full whitespace-nowrap hero-mobile-name-line hero-mobile-name-line-2 text-[clamp(5.1rem,22vw,8.6rem)] md:text-[clamp(6rem,12vw,16rem)] md:leading-[0.85]'
-								style={{ display: 'block' }}
-							>
-								Safwan
+							<div className='overflow-hidden w-full'>
+								<motion.div
+									initial={{ y: '110%' }}
+									animate={heroReady ? { y: 0 } : { y: '110%' }}
+									transition={{
+										delay: 0.2,
+										duration: 1.1,
+										ease: [0.16, 1, 0.3, 1],
+									}}
+									className='w-full'
+								>
+									<div
+										className='w-full whitespace-nowrap hero-mobile-name-line hero-mobile-name-line-2 text-[clamp(5.1rem,22vw,8.6rem)] md:text-[clamp(6rem,12vw,16rem)] md:leading-[0.85]'
+										style={{ display: 'block' }}
+									>
+										Safwan
+									</div>
+								</motion.div>
 							</div>
-						</motion.div>
+						</span>
 					</h1>
 				</div>
 			</motion.div>
@@ -98,7 +100,7 @@ export function Hero() {
 			<motion.div
 				initial={{ opacity: 0 }}
 				animate={heroReady ? { opacity: 1 } : { opacity: 0 }}
-				transition={{ delay: 1.8 }}
+				transition={{ delay: 1 }}
 				className='absolute right-4 bottom-12 flex flex-col items-center gap-[1.5vh] z-20 hero-mobile-scroll md:right-[1.5rem] md:top-[15vh] md:translate-y-0 md:gap-[0.75rem]'
 			>
 				<div className='relative w-[2px] h-16 overflow-hidden opacity-60 hero-mobile-scroll-line md:w-[1px] md:h-[5vh] md:mb-[0.5rem]'>
@@ -127,9 +129,9 @@ export function Hero() {
 
 			{/* ── BOTTOM: Bio left + Pills right ── */}
 			<motion.div
-				initial={{ opacity: 0, y: '2vh' }}
-				animate={heroReady ? { opacity: 1, y: 0 } : { opacity: 0, y: '2vh' }}
-				transition={{ delay: 1, duration: 0.8, ease: EASE }}
+				initial={{ y: '2vh' }}
+				animate={heroReady ? { y: 0 } : { y: '2vh' }}
+				transition={{ delay: 0.45, duration: 0.8, ease: EASE }}
 				className='relative z-10 w-full flex flex-col items-start mt-auto pb-12 hero-mobile-bottom md:absolute md:inset-0 md:pointer-events-none md:p-0 md:m-0'
 			>
 				{/* Left: description */}

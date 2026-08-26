@@ -6,6 +6,33 @@ import { ArrowUpRight } from 'lucide-react';
 
 const featuredProjects = [
 	{
+		name: 'Community Election Systems',
+		tagline: 'Computerised voting for Anjuman & Tanzeem, Bhatkal',
+		description:
+			'Co-developed the computerised voting applications used to conduct the 2024 Anjuman Hami-e-Muslimeen and 2026 Majlis-e-Islah wa Tanzeem elections in Bhatkal. Credited by name in SahilOnline’s reporting on both.',
+		metrics: [
+			{ number: '536 / 745', label: 'Votes Cast' },
+			{ number: 'Under 1 min', label: 'To Full Result' },
+			{ number: '75.43%', label: 'Tanzeem Turnout' },
+		],
+		highlights: [
+			'One locked voter roll enforcing one-member-one-vote across all terminals',
+			'Twelve polling terminals validating against the same live register',
+			'Continuous counting — full result ready within a minute of close',
+			'Timestamped audit record handed to the organisation for verification',
+		],
+		tech: [
+			'Next.js',
+			'React',
+			'PostgreSQL',
+			'RBAC',
+			'Audit Logging',
+			'Bilingual / RTL',
+		],
+		status: 'DELIVERED',
+		url: '/work/election-systems/',
+	},
+	{
 		name: 'ProCraft ERP',
 		tagline: 'Multi-tenant SaaS ERP',
 		description:
@@ -160,6 +187,42 @@ const otherProjects = [
 		url: '#',
 	},
 ];
+
+/**
+ * The "other projects" list has entries with no destination yet. Rendering
+ * those as <a href='#'> put eight dead links on the highest-authority page on
+ * the site, so a row without a real URL is now plain markup instead.
+ */
+function OtherProjectRow({
+	url,
+	children,
+}: {
+	url: string;
+	children: React.ReactNode;
+}) {
+	const className =
+		'block w-full group border-t last:border-b transition-colors duration-500';
+	const style = { borderColor: 'var(--theme-border)' };
+
+	if (!url || url === '#') {
+		return (
+			<div className={className} style={style}>
+				{children}
+			</div>
+		);
+	}
+
+	return (
+		<a
+			href={url}
+			className={`${className} project-hover-target`}
+			style={style}
+			data-cursor-text='Click to visit'
+		>
+			{children}
+		</a>
+	);
+}
 
 export function Projects() {
 	const isWorkInProgress = (status: string) => {
@@ -521,12 +584,7 @@ export function Projects() {
 			<div className='flex flex-col relative z-10 px-[3vw] md:px-[4vw]'>
 				{otherProjects.map((project, index) => (
 					<FadeIn key={project.id} delay={index * 0.03} className='w-full'>
-						<a
-							href={project.url}
-							className='block w-full group border-t last:border-b transition-colors duration-500 project-hover-target'
-							style={{ borderColor: 'var(--theme-border)' }}
-							data-cursor-text='Click to visit'
-						>
+						<OtherProjectRow url={project.url}>
 							<div className='py-[1.8vh] flex flex-col md:flex-row gap-[1vh] md:gap-0'>
 								{/* Mobile ID & Status */}
 								<div className='flex justify-between md:hidden'>
@@ -611,7 +669,7 @@ export function Projects() {
 									</motion.div>
 								</div>
 							</div>
-						</a>
+						</OtherProjectRow>
 					</FadeIn>
 				))}
 			</div>

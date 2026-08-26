@@ -17,6 +17,19 @@ export function CustomCursor() {
 
 	const [isHovering, setIsHovering] = useState(false);
 	const [isVisible, setIsVisible] = useState(false);
+	/**
+	 * Mirrors the `(hover: hover) and (pointer: fine)` guard in globals.css that
+	 * hides the native cursor. Resolved in an effect rather than at render so the
+	 * server and first client render agree, and so the two gates can't disagree
+	 * and leave a device with no cursor at all.
+	 */
+	const [enabled, setEnabled] = useState(false);
+
+	useEffect(() => {
+		setEnabled(
+			window.matchMedia('(hover: hover) and (pointer: fine)').matches,
+		);
+	}, []);
 
 	const [hoverText, setHoverText] = useState('');
 
@@ -71,10 +84,7 @@ export function CustomCursor() {
 		isVisible,
 	]);
 
-	// Don't render on touch devices
-	if (typeof window !== 'undefined' && 'ontouchstart' in window) {
-		return null;
-	}
+	if (!enabled) return null;
 
 	return (
 		<>

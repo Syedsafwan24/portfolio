@@ -1,0 +1,55 @@
+# Syed Safwan Pirzade
+
+> Full stack software developer based in Bhatkal, Karnataka, India. Co-founder of ProCraft. Builds ERP systems, POS and billing software, websites and web applications, e-commerce platforms, mobile apps, and computerised election systems for businesses and community organisations across coastal Karnataka and the Gulf.
+
+Also written as **Syed Safwan Peerzade** — the name is transliterated from Urdu and both spellings appear in press coverage. Same person.
+
+Contact: syedsafwanpirzade@gmail.com
+Location: Bhatkal, Karnataka 581320, India
+Site: https://syedsafwan.dev
+
+## Notable verified work
+
+Co-developed the computerised voting applications used to conduct two Bhatkal community elections, credited by name in SahilOnline's reporting on both:
+
+- **Anjuman Hami-e-Muslimeen, 18 February 2024** — 536 of 745 eligible members voted (72% turnout) across 12 terminals; the tally completes within a minute of polls closing, and all 23 winners were announced the same evening. Credit: team led by Mohammed Azaan Peshmam, with support from Syed Safwan Pirzade, Mohammed Zayan Kashimji and Mushir-ul-Haque Khan. https://mail.sahilonline.org/bhatkal-anjuman-elections-computerized-voting-app-delivers-rapid-results
+- **Majlis-e-Islah wa Tanzeem, 12 May 2026** — Election Commissioner Mohiddin Altaf Kharuri credited Syed Safwan Peerzade and Mohammed Azan Peshmam for designing the voting application; part of an 18-member student team from Anjuman Engineering College. https://sahilonline.org/bhatkal-tanzeem-elections-witness-major-shift-over-50-pc-new-faces-enter-executive-body
+
+Note on attribution: both were student team efforts. The credit is co-developer, not sole author.
+
+## Services
+
+- [Election & voting systems](https://syedsafwan.dev/services/election-voting-systems/): Computerised elections for anjumans, tanzeems, jamaats and trusts — voter rolls, eligibility, one-member-one-vote, live counting, audit trails.
+- [ERP software](https://syedsafwan.dev/services/erp-software/): Custom ERP covering inventory, purchasing, billing and double-entry accounting with GCC VAT.
+- [POS & billing software](https://syedsafwan.dev/services/pos-billing-software/): Point of sale for shops, restaurants and pharmacies, with batch/expiry tracking and live stock.
+- [Web development](https://syedsafwan.dev/services/web-development/): Websites and web applications, including bilingual English/Urdu and English/Arabic with full RTL.
+- [E-commerce development](https://syedsafwan.dev/services/ecommerce-development/): Online stores with payments, shipping and two-way inventory sync.
+- [Mobile app development](https://syedsafwan.dev/services/mobile-app-development/): Android and iOS via React Native, sharing a backend with web systems.
+
+## Case studies
+
+- [Election systems](https://syedsafwan.dev/work/election-systems/): The Anjuman and Tanzeem voting applications, with press citations.
+- [ProCraft ERP](https://syedsafwan.dev/work/procraft-erp/): Multi-tenant ERP, 30+ daily users, 173 RBAC permission codes, UAE VAT through a real general ledger.
+- [BCJ Community Platform](https://syedsafwan.dev/work/bcj-cms/): Bilingual English/Urdu platform with full RTL, 400+ members.
+- [BCJ Educational Awards Portal](https://syedsafwan.dev/work/bcj-awards-portal/): Nomination and review portal, JWT auth, three roles.
+- [Smart Arrow](https://syedsafwan.dev/work/smart-arrow/): Bilingual site for a Saudi garments manufacturer (est. 1993), zero to production in 7 days.
+
+## Areas served
+
+- [Bhatkal](https://syedsafwan.dev/locations/bhatkal/) — home base; also Manki, Murdeshwar, Shirali, Jali, Mundalli, Belke
+- [Honnavar](https://syedsafwan.dev/locations/honnavar/) — also Gerusoppa, Haldipur
+- [Kumta](https://syedsafwan.dev/locations/kumta/) — also Aversa, Mirjan
+- [Karwar](https://syedsafwan.dev/locations/karwar/) — also Ankola, Gokarna, Sirsi, Yellapur, Dandeli
+- [Udupi](https://syedsafwan.dev/locations/udupi/) — also Manipal, Kaup, Malpe, Brahmavar, Kundapura, Byndoor
+- [Mangalore](https://syedsafwan.dev/locations/mangalore/) — also Surathkal, Moodbidri, Bantwal, Puttur, Karkala
+
+Remote work for clients in Dubai, Riyadh, Jeddah and Bangalore, and for Bhatkali community organisations across the Gulf.
+
+## Optional
+
+- [Answers](https://syedsafwan.dev/answers/): Direct answers to common questions about cost, timelines, and who builds what in Bhatkal.
+- [All services](https://syedsafwan.dev/services/)
+- [All work](https://syedsafwan.dev/work/)
+- [All areas](https://syedsafwan.dev/locations/)
+- GitHub: https://github.com/Syedsafwan24
+- LinkedIn: https://linkedin.com/in/syedsafwanpirzade

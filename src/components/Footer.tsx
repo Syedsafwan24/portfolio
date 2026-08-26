@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FadeIn } from './animation/FadeIn';
+import { SITE } from '@/lib/site';
 
 export function Footer() {
 	const [isHovered, setIsHovered] = useState(false);
@@ -27,7 +28,7 @@ export function Footer() {
 			<div className='w-full relative z-10'>
 				{/* Small label */}
 				<FadeIn>
-					<div
+					<h2
 						className='font-display uppercase tracking-[0.2em]'
 						style={{
 							fontSize: 'clamp(0.65rem, 0.8vw, 0.9rem)',
@@ -37,7 +38,7 @@ export function Footer() {
 						}}
 					>
 						Get in touch
-					</div>
+					</h2>
 				</FadeIn>
 
 				{/* Giant CTA */}
@@ -64,9 +65,16 @@ export function Footer() {
 							Say Hi!
 						</div>
 
-						{/* "Let's talk ↗" */}
+						{/* "Let's talk ↗" — WhatsApp is the channel people here actually
+						    reply on; email stays available in the row below. */}
 						<a
-							href='mailto:syedsafwanpirzade@gmail.com'
+							href={
+								SITE.nap.whatsapp
+									? `https://wa.me/${SITE.nap.whatsapp}`
+									: `mailto:${SITE.nap.email}`
+							}
+							target={SITE.nap.whatsapp ? '_blank' : undefined}
+							rel={SITE.nap.whatsapp ? 'noopener' : undefined}
 							style={{
 								textDecoration: 'none',
 								display: 'inline-block',
@@ -74,7 +82,9 @@ export function Footer() {
 							}}
 							onMouseEnter={() => setIsHovered(true)}
 							onMouseLeave={() => setIsHovered(false)}
-							data-cursor-text='Send Message'
+							data-cursor-text={
+								SITE.nap.whatsapp ? 'Chat on WhatsApp' : 'Send Message'
+							}
 						>
 							<div
 								style={{
@@ -179,6 +189,14 @@ export function Footer() {
 									label: 'EMAIL',
 									href: 'mailto:syedsafwanpirzade@gmail.com',
 								},
+								...(SITE.nap.whatsapp
+									? [
+											{
+												label: 'WHATSAPP',
+												href: `https://wa.me/${SITE.nap.whatsapp}`,
+											},
+										]
+									: []),
 								{
 									label: 'LINKEDIN',
 									href: 'https://linkedin.com/in/syedsafwanpirzade',
@@ -240,7 +258,7 @@ export function Footer() {
 						paddingBottom: '4vh',
 					}}
 				>
-					© 2026 Syed Safwan · Frontend Developer
+					© 2026 Syed Safwan Pirzade · Full Stack Developer · Bhatkal, Karnataka
 				</div>
 			</div>
 		</footer>

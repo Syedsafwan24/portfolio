@@ -49,9 +49,11 @@ const achievements = [
 	},
 ];
 
+// Translate-only: these wrap the experience and achievement lists, so fading
+// from opacity:0 would ship that text hidden in the prerendered HTML.
 const fadeUp = {
-	initial: { opacity: 0, y: 20 },
-	whileInView: { opacity: 1, y: 0 },
+	initial: { y: 20 },
+	whileInView: { y: 0 },
 	viewport: { once: true },
 	transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
 };
@@ -120,10 +122,11 @@ export function About() {
 							}}
 						>
 							<span style={{ color: 'var(--theme-heading)', fontWeight: 500 }}>
-								Co-Founder & Full Stack Developer
+								Full stack developer based in Bhatkal, Karnataka
 							</span>{' '}
-							at ProCraft Digital Agency. We offer complete digital services, shipping production software
-							for clients across the UAE, Saudi Arabia, and India.
+							and Co-Founder of ProCraft. I build ERP systems, POS and billing
+							software, websites, online stores and mobile apps for businesses
+							across coastal Karnataka, the UAE and Saudi Arabia.
 						</p>
 					</FadeInSlide>
 
@@ -137,12 +140,12 @@ export function About() {
 								fontWeight: 350,
 							}}
 						>
-							I design interfaces, build{' '}
+							I also co-developed the{' '}
 							<span style={{ color: 'var(--theme-heading)', fontWeight: 500 }}>
-								React and Next.js applications
-							</span>
-							, edit promotional reels, configure CI/CD pipelines, deploy to
-							VPS, and use AI tools daily to ship faster and smarter.
+								computerised voting used in Bhatkal community elections
+							</span>{' '}
+							— the 2024 Anjuman Hami-e-Muslimeen and 2026 Tanzeem polls, both
+							credited by name in SahilOnline&rsquo;s reporting.
 						</p>
 					</FadeInSlide>
 
@@ -156,11 +159,13 @@ export function About() {
 								fontWeight: 350,
 							}}
 						>
-							Through our agency, we provide{' '}
+							Day to day that means React and Next.js applications on
+							PostgreSQL, bilingual{' '}
 							<span style={{ color: 'var(--theme-heading)', fontWeight: 500 }}>
-								full-service digital solutions
-							</span>
-							, from design to deployed code. I enjoy working closely with clients to build tailored products that drive real results.
+								Urdu and Arabic interfaces with full right-to-left layout
+							</span>, and CI/CD pipelines deploying to VPS and AWS. I would rather
+							tell you an existing product fits better than build you something
+							you do not need.
 						</p>
 					</FadeInSlide>
 

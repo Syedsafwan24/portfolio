@@ -2,9 +2,14 @@
 
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useLoading, useTheme } from '@/components/RootProvider';
 
+type NavLink = { href: string; label: string; route?: boolean };
+
 export function Nav() {
+	const pathname = usePathname();
 	const { isLoading } = useLoading();
 	const { theme, toggleTheme } = useTheme();
 	const [scrolled, setScrolled] = useState(false);
@@ -37,26 +42,82 @@ export function Nav() {
 		return () => window.removeEventListener('scroll', handleScroll);
 	}, []);
 
+	// Scrolling with the menu open should dismiss it. The threshold avoids
+	// closing on the scroll event that opening the menu can itself trigger as
+	// the header grows.
+	useEffect(() => {
+		if (!mobileMenuOpen) return;
+
+		const openedAt = window.scrollY;
+		const handleScrollClose = () => {
+			if (Math.abs(window.scrollY - openedAt) > 8) {
+				setMobileMenuOpen(false);
+			}
+		};
+
+		window.addEventListener('scroll', handleScrollClose, { passive: true });
+		return () => window.removeEventListener('scroll', handleScrollClose);
+	}, [mobileMenuOpen]);
+
 	const handleNavClick = () => {
 		setMobileMenuOpen(false);
 	};
 
-	const navLinks = [
-		{ href: '#projects', label: 'Work' },
-		{ href: '#about', label: 'About' },
-		{ href: '#contact', label: 'Contact' },
+	/**
+	 * On any other route the logo just navigates home. On the home page itself
+	 * that would be a no-op, so scroll back to the top instead.
+	 */
+	const handleLogoClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+		setMobileMenuOpen(false);
+
+		if (window.location.pathname !== '/') return;
+
+		event.preventDefault();
+		const reduceMotion = window.matchMedia(
+			'(prefers-reduced-motion: reduce)',
+		).matches;
+		window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+	};
+
+	// Section anchors only resolve on the home page; everywhere else they have
+	// to carry the path or they scroll nowhere.
+	const onHome = pathname === '/';
+	const hash = (id: string) => (onHome ? `#${id}` : `/#${id}`);
+
+	// trailingSlash: true means pathname carries a trailing slash; normalise
+	// both sides so '/services/erp-software/' still marks Services as current.
+	const withSlash = (value: string) =>
+		value.endsWith('/') ? value : `${value}/`;
+
+	const isActive = (href: string, route?: boolean) => {
+		if (!route) return false;
+		const current = withSlash(pathname);
+		const target = withSlash(href);
+		return target === '/' ? current === '/' : current.startsWith(target);
+	};
+
+	const navLinks: NavLink[] = [
+		{ href: '/', label: 'Home', route: true },
+		{ href: '/services/', label: 'Services', route: true },
+		{ href: '/work/', label: 'Work', route: true },
+		{ href: '/answers/', label: 'FAQ', route: true },
+		{ href: hash('about'), label: 'About' },
+		{ href: hash('contact'), label: 'Contact' },
 	];
 
 	return (
 		<motion.header
-			initial={{ y: '-10vh', opacity: 0 }}
+			initial={{ y: '-10vh' }}
 			animate={{
 				y: !isLoading ? 0 : '-10vh',
-				opacity: !isLoading ? 1 : 0,
 				top: scrolled ? '1.4vh' : '0vh',
 				marginLeft: scrolled ? (isMobile ? '6vw' : '16vw') : '0vw',
 				marginRight: scrolled ? (isMobile ? '6vw' : '16vw') : '0vw',
-				borderRadius: scrolled ? '9999px' : '0px',
+				borderRadius: mobileMenuOpen
+					? '1.5rem'
+					: scrolled
+						? '9999px'
+						: '0px',
 				backgroundColor: scrolled
 					? 'var(--theme-navbar-blur-bg)'
 					: 'var(--theme-navbar-blur-bg-transparent)',
@@ -86,8 +147,10 @@ export function Nav() {
 				}`}
 			>
 				{/* Logo */}
-				<a
-					href='#'
+				<Link
+					href='/'
+					onClick={handleLogoClick}
+					aria-label='Syed Safwan Pirzade — home'
 					className='font-display lowercase tracking-[0.04em] transition-colors duration-300'
 					style={{
 						fontSize: 'clamp(0.9rem, 1.12vw, 1.24rem)',
@@ -98,27 +161,39 @@ export function Nav() {
 					}}
 				>
 					sy3d
-				</a>
+				</Link>
 
 				{/* Desktop Nav */}
 				<nav
 					className='hidden md:flex items-center gap-[2.1vw] uppercase'
 					style={{ fontSize: 'min(0.72vw, 0.68rem)', letterSpacing: '0.14em' }}
 				>
-					{navLinks.map(({ href, label }) => (
-						<a
+					{navLinks.map(({ href, label, route }) => {
+						const Tag = route ? Link : 'a';
+						const active = isActive(href, route);
+						return (
+							<Tag
 							key={href}
 							href={href}
+							aria-current={active ? 'page' : undefined}
 							className='relative group transition-colors duration-300 py-[0.5vh]'
-							style={{ color: 'var(--theme-navbar-link)', fontWeight: 450 }}
+							style={{
+								color: active
+									? 'var(--theme-heading)'
+									: 'var(--theme-navbar-link)',
+								fontWeight: active ? 500 : 450,
+							}}
 						>
 							{label}
 							<span
-								className='absolute bottom-0 left-0 w-full h-[1px] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]'
+								className={`absolute bottom-0 left-0 w-full h-[1px] origin-left transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+									active ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+								}`}
 								style={{ backgroundColor: 'var(--theme-heading)' }}
 							/>
-						</a>
-					))}
+						</Tag>
+						);
+					})}
 					<button
 						onClick={toggleTheme}
 						className='ml-[0.5vw] flex items-center gap-[0.4vw] transition-colors duration-300 rounded-full px-[1vw] py-[0.6vh]'
@@ -156,10 +231,30 @@ export function Nav() {
 					</button>
 				</nav>
 
-				{/* Mobile Nav Toggle (Replaced with Theme Toggle) */}
+				{/* Mobile controls: menu + theme, sharing one pill treatment */}
+				<div className='md:hidden flex items-center gap-[0.5rem]'>
+				<button
+					onClick={() => setMobileMenuOpen((open) => !open)}
+					id='mobile-menu-button'
+					aria-expanded={mobileMenuOpen}
+					aria-controls='mobile-menu'
+					aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+					className='flex items-center transition-colors duration-300 rounded-full px-[0.95rem] py-[0.36rem]'
+					style={{
+						color: 'var(--theme-toggle-text)',
+						fontWeight: 400,
+						borderWidth: '1px',
+						borderStyle: 'solid',
+						borderColor: 'var(--theme-toggle-border)',
+						fontSize: '0.68rem',
+						letterSpacing: '0.14em',
+					}}
+				>
+					{mobileMenuOpen ? 'CLOSE' : 'MENU'}
+				</button>
 				<button
 					onClick={toggleTheme}
-					className='md:hidden flex items-center gap-[0.35rem] transition-colors duration-300 rounded-full px-[0.95rem] py-[0.36rem]'
+					className='flex items-center gap-[0.35rem] transition-colors duration-300 rounded-full px-[0.95rem] py-[0.36rem]'
 					style={{
 						color: 'var(--theme-toggle-text)',
 						fontWeight: 400,
@@ -195,6 +290,7 @@ export function Nav() {
 					{isLight ? 'DARK' : 'LIGHT'}
 				</button>
 			</div>
+			</div>
 
 			{/* Mobile Menu */}
 			<AnimatePresence>
@@ -207,7 +303,9 @@ export function Nav() {
 							duration: 0.4,
 							ease: [0.16, 1, 0.3, 1],
 						}}
-						className={`absolute top-full left-0 w-full backdrop-blur-2xl overflow-hidden md:hidden border-b nav-mobile-menu-panel`}
+						id='mobile-menu'
+						aria-labelledby='mobile-menu-button'
+						className={`w-full backdrop-blur-2xl overflow-hidden md:hidden nav-mobile-menu-panel`}
 						style={{
 							backgroundColor: 'var(--theme-surface)',
 							borderColor: 'var(--theme-border)',
@@ -217,54 +315,41 @@ export function Nav() {
 							className='px-[5vw] py-[5vh] flex flex-col gap-[3vh] uppercase tracking-[0.15em]'
 							style={{ fontSize: 'min(3.5vw, 0.85rem)' }}
 						>
-							{navLinks.map(({ href, label }, i) => (
-								<motion.a
+							{navLinks.map(({ href, label, route }, i) => {
+								const Tag = route ? motion.create(Link) : motion.a;
+								const active = isActive(href, route);
+								return (
+									<Tag
 									key={href}
 									href={href}
 									onClick={handleNavClick}
-									initial={{ opacity: 0, x: -20 }}
-									animate={{ opacity: 1, x: 0 }}
+									aria-current={active ? 'page' : undefined}
+									initial={{ x: -20 }}
+									animate={{ x: 0 }}
 									transition={{ delay: i * 0.05 }}
-									className='transition-colors'
-									style={{ color: 'var(--theme-navbar-link)', fontWeight: 500 }}
-								>
-									{label}
-								</motion.a>
-							))}
-							<button
-								onClick={toggleTheme}
-								className='flex items-center gap-[2vw] transition-colors duration-300 rounded-full px-[4vw] py-[1.2vh] w-fit mt-[1vh]'
-								style={{
-									color: 'var(--theme-toggle-text)',
-									fontWeight: 400,
-									borderWidth: '1px',
-									borderStyle: 'solid',
-									borderColor: 'var(--theme-toggle-border)',
-								}}
-							>
-								<span
-									className='rounded-full relative overflow-hidden flex'
+									className='transition-colors w-fit'
 									style={{
-										width: '2.5vw',
-										height: '2.5vw',
-										minWidth: '10px',
-										minHeight: '10px',
-										backgroundColor: 'var(--theme-toggle-text)',
-										opacity: 0.35,
-										border: '1px solid var(--theme-toggle-border)',
+										color: 'var(--theme-navbar-link)',
+										fontWeight: active ? 700 : 500,
 									}}
 								>
 									<span
-										className='w-1/2 h-full'
-										style={{
-											backgroundColor: 'var(--theme-toggle-text)',
-											opacity: 0.9,
-										}}
-									></span>
-									<span className='w-1/2 h-full bg-transparent'></span>
-								</span>
-								{isLight ? 'DARK' : 'LIGHT'}
-							</button>
+										style={
+											active
+												? {
+														display: 'inline-block',
+														paddingBottom: '0.5vh',
+														borderBottom:
+															'1px solid var(--theme-heading)',
+													}
+												: undefined
+										}
+									>
+										{label}
+									</span>
+								</Tag>
+								);
+							})}
 						</div>
 					</motion.div>
 				)}

@@ -3,14 +3,19 @@
 import { motion } from 'framer-motion';
 
 export function Ticker() {
+	// Mirrors what the service pages actually target, so the marquee reinforces
+	// the same terms rather than describing an older frontend-only positioning.
 	const items = [
-		'FRONTEND DEV',
-		'UI/UX DESIGNER',
-		'VIDEO EDITOR',
-		'DEVOPS',
-		'AI-AUGMENTED',
-		'AVAILABLE',
+		'FULL STACK DEV',
+		'ERP SYSTEMS',
+		'POS & BILLING',
+		'ELECTION SYSTEMS',
+		'E-COMMERCE',
+		'MOBILE APPS',
+		'UI/UX DESIGN',
+		'BHATKAL, KARNATAKA',
 		'GULF & INDIA',
+		'AVAILABLE',
 	];
 
 	// Duplicate enough for seamless loop

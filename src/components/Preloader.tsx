@@ -3,19 +3,31 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
-export function Preloader({ isComplete }: { isComplete: boolean }) {
+export function Preloader({
+	isComplete,
+	skip = false,
+}: {
+	isComplete: boolean;
+	skip?: boolean;
+}) {
 	const [showLoader, setShowLoader] = useState(!isComplete);
 
 	useEffect(() => {
+		if (skip) {
+			setShowLoader(false);
+			return;
+		}
 		if (isComplete) {
 			const timer = setTimeout(() => {
 				setShowLoader(false);
 			}, 600);
 			return () => clearTimeout(timer);
 		}
-	}, [isComplete]);
+	}, [isComplete, skip]);
 
-	if (!showLoader) return null;
+	// `skip` is checked during render, not just in the effect, so a route that
+	// never wanted the preloader drops it without a frame of overlay.
+	if (skip || !showLoader) return null;
 
 	return (
 		<motion.div
@@ -59,7 +71,7 @@ export function Preloader({ isComplete }: { isComplete: boolean }) {
 							initial={{ scaleX: 0 }}
 							animate={{ scaleX: 1 }}
 							transition={{
-								duration: 2.5,
+								duration: 0.7,
 								ease: [0.16, 1, 0.3, 1],
 							}}
 							className='absolute inset-0 origin-left rounded-full'

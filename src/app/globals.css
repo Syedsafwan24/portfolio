@@ -126,6 +126,10 @@ html.light-mode {
 	--color-border: #d8d2c8;
 }
 
+[id] {
+	scroll-margin-top: clamp(72px, 12vh, 120px);
+}
+
 html {
 	scroll-behavior: smooth;
 	-webkit-font-smoothing: antialiased;
@@ -178,14 +182,16 @@ body::before {
 	background: var(--theme-scrollbar-thumb-hover);
 }
 
-* {
-	cursor: none !important;
-}
+@media (hover: hover) and (pointer: fine) {
+	* {
+		cursor: none !important;
+	}
 
-a,
-button,
-[role='button'] {
-	cursor: none !important;
+	a,
+	button,
+	[role='button'] {
+		cursor: none !important;
+	}
 }
 
 .no-scrollbar::-webkit-scrollbar {
@@ -281,19 +287,25 @@ button,
 	cursor: pointer !important;
 }
 
-section,
-footer,
-header,
-main,
-div,
-span,
-p,
-h1,
-h2,
-h3,
-h4,
-a,
-button {
+/*
+ * Colour transitions exist so the theme toggle cross-fades rather than snaps.
+ * Applying them to every element permanently makes style recalc scale with DOM
+ * size, which content pages feel. RootProvider adds .theme-switching for 320ms
+ * around the toggle, so the cost is paid only when it is actually visible.
+ */
+html.theme-switching section,
+html.theme-switching footer,
+html.theme-switching header,
+html.theme-switching main,
+html.theme-switching div,
+html.theme-switching span,
+html.theme-switching p,
+html.theme-switching h1,
+html.theme-switching h2,
+html.theme-switching h3,
+html.theme-switching h4,
+html.theme-switching a,
+html.theme-switching button {
 	transition:
 		color 0.3s ease,
 		background-color 0.3s ease,
@@ -314,10 +326,6 @@ button {
 	.nav-mobile-row {
 		padding-left: 1rem !important;
 		padding-right: 1rem !important;
-	}
-
-	.nav-mobile-menu-panel {
-		top: 100% !important;
 	}
 
 	.preloader-mobile-shell {
@@ -469,4 +477,90 @@ button {
 		padding: 0.52rem 0.95rem !important;
 		letter-spacing: 0.11em !important;
 	}
+}
+
+
+/*
+ * Scroll-driven reveal used by server-rendered content pages.
+ *
+ * Unlike the framer-motion helpers in components/animation, this never
+ * serialises opacity:0 into the prerendered markup — the base state is fully
+ * visible and the animation is layered on top only where supported. Matches
+ * the 24px / fade vocabulary of FadeIn so the motion reads identically.
+ */
+/*
+ * Translate only, never opacity.
+ *
+ * A scroll-driven animation holds whatever value the scroll position maps to,
+ * so any element whose range cannot complete stays stuck at that value. With
+ * opacity in the keyframes that renders as permanently dimmed text — which is
+ * exactly what a tall section near the end of the document does. Translating
+ * alone degrades to a few pixels of offset instead of unreadable content, and
+ * it matches the translate-only reveal the rest of the site now uses.
+ */
+@keyframes reveal-up {
+	from {
+		transform: translateY(24px);
+	}
+	to {
+		transform: none;
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	@supports (animation-timeline: view()) {
+		.reveal {
+			animation: reveal-up linear both;
+			animation-timeline: view();
+			/* Completes as the element enters. `cover` is measured across the
+			   whole element, so a tall section would still be mid-animation
+			   long after it is fully on screen. */
+			animation-range: entry 0% entry 100%;
+		}
+	}
+}
+
+/* Divider rows and FAQ disclosures on content pages — the hover treatment the
+   Certifications list applies with JS handlers, expressed as plain CSS so the
+   components stay server-rendered. */
+.divider-row,
+.faq-row {
+	transition: background-color 0.5s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.divider-row:hover,
+	.faq-row:hover {
+		background-color: var(--theme-card-hover);
+	}
+}
+
+.faq-row summary::-webkit-details-marker {
+	display: none;
+}
+
+.faq-marker {
+	transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+	display: inline-block;
+}
+
+.faq-row[open] .faq-marker {
+	transform: rotate(90deg);
+}
+
+.breadcrumb-link:hover {
+	color: var(--theme-heading);
+}
+
+/* Content-page links inside prose */
+.prose-link {
+	color: var(--theme-heading);
+	text-decoration: underline;
+	text-underline-offset: 0.25em;
+	text-decoration-color: var(--theme-border-heading);
+	transition: text-decoration-color 0.3s ease;
+}
+
+.prose-link:hover {
+	text-decoration-color: var(--theme-orange);
 }
